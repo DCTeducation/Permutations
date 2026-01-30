@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Permutations | DCT Education</title>
+    <style>
+      body{font-family:Arial, sans-serif; max-width:900px; margin:40px auto; padding:0 16px; line-height:1.6;}
+      h1{margin:0 0 6px;}
+      .muted{color:#666;}
+      .card{border:1px solid #ddd; border-radius:12px; padding:16px; margin:14px 0;}
+      input, button{font-size:16px; padding:10px 12px; border-radius:10px; border:1px solid #ccc;}
+      button{cursor:pointer;}
+      .result{font-weight:700; font-size:18px;}
+      code{background:#f4f4f4; padding:2px 6px; border-radius:8px;}
+    </style>
+  </head>
+  <body>
+    <h1>Permutations</h1>
+    <p class="muted">If order matters, it’s a permutation.</p>
+
+    <div class="card">
+      <h2>Quick calculator: P(n, r)</h2>
+      <p>Example: <code>P(10,4)=10·9·8·7</code></p>
+      <p>
+        n: <input id="n" type="number" value="10" min="0" />
+        r: <input id="r" type="number" value="4" min="0" />
+        <button onclick="calc()">Calculate</button>
+      </p>
+      <p id="out" class="result"></p>
+    </div>
+
+    <script>
+      function P(n,r){
+        if (r > n) return 0;
+        let out = 1;
+        for (let k = 0; k < r; k++) out *= (n - k);
+        return out;
+      }
+      function calc(){
+        const n = parseInt(document.getElementById("n").value, 10);
+        const r = parseInt(document.getElementById("r").value, 10);
+        document.getElementById("out").textContent = `P(${n},${r}) = ${P(n,r)}`;
+      }
+      calc();
+    </script>
+  </body>
+</html>
