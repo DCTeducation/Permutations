@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Permutations | DCT Education</title>
+  <style>
+    body{font-family:Arial, sans-serif; max-width:920px; margin:32px auto; padding:0 16px; line-height:1.55;}
+    h1{margin:0 0 8px;}
+    .sub{color:#555; margin:0 0 18px;}
+    .card{border:1px solid #ddd; border-radius:12px; padding:16px; margin:14px 0; box-shadow:0 1px 2px rgba(0,0,0,.04);}
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;}
+    label{display:block; font-weight:600; margin-bottom:6px;}
+    input, select, button{font-size:16px; padding:10px 12px; border-radius:10px; border:1px solid #ccc;}
+    button{cursor:pointer;}
+    button:hover{filter:brightness(0.98);}
+    .pill{display:inline-block; padding:3px 10px; border-radius:999px; background:#f1f5ff; border:1px solid #dbe6ff; font-size:14px;}
+    .good{background:#ecfdf3; border-color:#bfe9cf;}
+    .bad{background:#fff1f2; border-color:#fecdd3;}
+    code, pre{background:#f6f6f6; border-radius:10px;}
+    code{padding:2px 6px;}
+    pre{padding:12px; overflow:auto;}
+    .muted{color:#666;}
+    .result{font-weight:700; font-size:18px;}
+    .small{font-size:14px;}
+    ul{margin:8px 0 0 20px;}
+  </style>
+</head>
+<body>
+
+  <h1>Permutations</h1>
+  <p class="sub">DCT Education — Learn this fast, the way tests actually ask it.</p>
+
+  <div class="card">
+    <h2>1) The only rule you need first</h2>
+    <p><span class="pill">Permutation</span> means <b>order matters</b>.</p>
+    <ul>
+      <li>PIN: <code>1234</code> is different than <code>4321</code> → order matters → permutation</li>
+      <li>Choosing pizza toppings: pepperoni + mushrooms is the same set either way → order doesn’t matter</li>
+    </ul>
+    <p class="muted small">Test trick: If the question has different roles (1st/2nd/3rd, President/Vice, Gold/Silver/Bronze), it’s almost always a permutation.</p>
+  </div>
+
+  <div class="card">
+    <h2>2) Quick decision: Permutation or Combination?</h2>
+    <p>Answer this: <b>Does switching the order change the outcome?</b></p>
+
+    <div class="row">
+      <div style="flex:1; min-width:260px;">
+        <label for="scenario">Pick a scenario</label>
+        <select id="scenario">
+          <option value="podium">Awarding Gold/Silver/Bronze among 12 runners</option>
+          <option value="committee">Choosing 5 students for a committee</option>
+          <option value="password">Creating a 4-digit PIN (no repeats)</option>
+          <option value="toppings">Choosing 3 pizza toppings from 10</option>
+          <option value="lineup">Selecting Captain, Assistant, and Goalie from 15 players</option>
+        </select>
+      </div>
+      <div>
+        <button onclick="checkScenario()">Check</button>
+      </div>
+    </div>
+
+    <p id="scenarioAnswer" class="result"></p>
+  </div>
+
+  <div class="card">
+    <h2>3) The permutation formula</h2>
+    <p>If you’re arranging <b>r</b> items chosen from <b>n</b> items (no repeats):</p>
+    <pre><code>P(n,r) = n! / (n-r)!</code></pre>
+    <p>Meaning:</p>
+    <ul>
