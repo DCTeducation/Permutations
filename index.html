@@ -70,3 +70,143 @@
     <pre><code>P(n,r) = n! / (n-r)!</code></pre>
     <p>Meaning:</p>
     <ul>
+      <li>Multiply <b>r</b> descending numbers: <code>n · (n-1) · (n-2) ...</code></li>
+      <li>Stop after <b>r</b> factors</li>
+    </ul>
+    <p class="muted small">Example: <code>P(10,4) = 10·9·8·7 = 5040</code></p>
+  </div>
+
+  <div class="card">
+    <h2>4) Calculator: compute P(n,r)</h2>
+    <div class="row">
+      <div>
+        <label for="n">n</label>
+        <input id="n" type="number" value="10" min="0" />
+      </div>
+      <div>
+        <label for="r">r</label>
+        <input id="r" type="number" value="4" min="0" />
+      </div>
+      <div>
+        <button onclick="calcPerm()">Calculate</button>
+      </div>
+    </div>
+    <p id="calcOut" class="result"></p>
+    <p class="muted small">If <code>r > n</code>, the answer is <code>0</code> (you can’t pick more than you have).</p>
+  </div>
+
+  <div class="card">
+    <h2>5) Practice (instant answers)</h2>
+    <p>Hit generate. Try it. Reveal the answer after.</p>
+    <div class="row">
+      <button onclick="newPractice()">Generate Question</button>
+      <button onclick="revealAnswer()">Reveal Answer</button>
+    </div>
+    <p id="practiceQ" class="result"></p>
+    <p id="practiceA" class="result"></p>
+    <p class="muted small">Goal: you should be able to spot <b>n</b> and <b>r</b> in 5 seconds.</p>
+  </div>
+
+  <div class="card">
+    <h2>6) Exam-style mini set</h2>
+    <ol>
+      <li>How many ways can you assign <b>President</b>, <b>Vice-President</b>, and <b>Treasurer</b> from 25 students?</li>
+      <li>How many 5-letter codes can be made from A–Z with <b>no repeats</b>?</li>
+      <li>How many different podium outcomes (1st/2nd/3rd) are possible from 14 runners?</li>
+    </ol>
+    <p class="muted small">If you want, I’ll add a “Show solutions” button with full steps.</p>
+  </div>
+
+<script>
+  function fact(x){
+    if (x < 0) return NaN;
+    let out = 1;
+    for (let i = 2; i <= x; i++) out *= i;
+    return out;
+  }
+
+  function P(n,r){
+    if (r > n) return 0;
+    // compute n*(n-1)*... for r terms (safer than huge factorials)
+    let out = 1;
+    for (let k = 0; k < r; k++) out *= (n - k);
+    return out;
+  }
+
+  function checkScenario(){
+    const val = document.getElementById("scenario").value;
+    const out = document.getElementById("scenarioAnswer");
+
+    const map = {
+      podium: {type:"Permutation", why:"Gold/Silver/Bronze are different positions → order matters."},
+      committee: {type:"Combination", why:"A committee has no order → only who is chosen matters."},
+      password: {type:"Permutation", why:"A PIN changes if digits change order → order matters."},
+      toppings: {type:"Combination", why:"Toppings are a set → order doesn’t matter."},
+      lineup: {type:"Permutation", why:"Roles are different (Captain vs Assistant vs Goalie) → order matters."}
+    };
+
+    const ans = map[val];
+    const isPerm = ans.type === "Permutation";
+    out.className = "result " + (isPerm ? "" : "");
+    out.innerHTML = `<span class="pill ${isPerm ? "good" : ""}">${ans.type}</span> ${ans.why}`;
+  }
+
+  function calcPerm(){
+    const n = parseInt(document.getElementById("n").value, 10);
+    const r = parseInt(document.getElementById("r").value, 10);
+    const out = document.getElementById("calcOut");
+
+    if (Number.isNaN(n) || Number.isNaN(r)) {
+      out.textContent = "Enter valid integers for n and r.";
+      return;
+    }
+    if (n < 0 || r < 0) {
+      out.textContent = "n and r must be ≥ 0.";
+      return;
+    }
+
+    const val = P(n,r);
+    out.textContent = `P(${n},${r}) = ${val}`;
+  }
+
+  let currentAnswer = null;
+
+  function newPractice(){
+    const contexts = [
+      "students lining up for a photo",
+      "digits in a PIN (no repeats)",
+      "books arranged on a shelf",
+      "players assigned to positions",
+      "letters chosen for a code (no repeats)"
+    ];
+    const n = randInt(6, 18);
+    const r = randInt(2, Math.min(7, n));
+    const context = contexts[randInt(0, contexts.length-1)];
+
+    document.getElementById("practiceQ").textContent =
+      `How many ways can you arrange ${r} out of ${n} (${context})?`;
+    currentAnswer = P(n,r);
+    document.getElementById("practiceA").textContent = "";
+  }
+
+  function revealAnswer(){
+    const out = document.getElementById("practiceA");
+    if (currentAnswer === null) {
+      out.textContent = "Generate a question first.";
+      return;
+    }
+    out.textContent = `Answer: ${currentAnswer}`;
+  }
+
+  function randInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // init
+  checkScenario();
+  calcPerm();
+  newPractice();
+</script>
+
+</body>
+</html>
