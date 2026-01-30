@@ -4,267 +4,294 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Permutations | DCT Education</title>
-  <meta name="description" content="Learn permutations (order matters) with decision training, calculator, and practice." />
   <style>
     :root{
-      --bg:#ffffff;
       --text:#111;
       --muted:#5b5b5b;
       --border:#dedede;
       --soft:#f6f6f6;
-      --soft2:#f1f5ff;
+      --accent:#0b5fff;
       --goodbg:#ecfdf3;
       --goodbd:#bfe9cf;
       --badbg:#fff1f2;
       --badbd:#fecdd3;
-      --accent:#0b5fff;
     }
     *{box-sizing:border-box}
     body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin:0; color:var(--text); background:#fff;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height:1.6;
     }
-    .wrap{max-width:980px; margin:0 auto; padding:28px 16px 64px;}
-    header{display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;}
+    .wrap{max-width:980px; margin:0 auto; padding:26px 16px 70px;}
+    header{padding:8px 0 12px;}
     h1{margin:0; font-size:34px; letter-spacing:-.02em;}
-    .tagline{margin:6px 0 0; color:var(--muted);}
-    .top-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px;}
+    .tag{display:inline-block; margin-left:8px; font-size:13px; padding:3px 10px; border-radius:999px; border:1px solid var(--border); background:var(--soft);}
+    .sub{margin:8px 0 0; color:var(--muted)}
+    nav{
+      position:sticky; top:0; z-index:10;
+      background:#fff; border-bottom:1px solid var(--border);
+      margin:14px -16px 18px; padding:10px 16px;
+    }
+    nav .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    a.navlink{
+      color:var(--text); text-decoration:none; font-weight:700; font-size:14px;
+      padding:8px 10px; border-radius:12px; border:1px solid var(--border); background:var(--soft);
+    }
+    a.navlink:hover{filter:brightness(.98)}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px; border-radius:12px; border:1px solid var(--border);
-      background:var(--bg); cursor:pointer; font-weight:600; font-size:14px;
+      background:#fff; cursor:pointer; font-weight:700; font-size:14px;
     }
-    .btn:hover{filter:brightness(.98)}
     .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
-    .btn.ghost{background:var(--soft);}
-    .pill{
-      display:inline-block; padding:3px 10px; border-radius:999px;
-      border:1px solid var(--border); background:var(--soft); font-size:13px; color:#222;
-    }
-    .grid{display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px;}
-    @media (min-width: 920px){
-      .grid{grid-template-columns: 1.15fr .85fr;}
-    }
+    .btn:hover{filter:brightness(.98)}
+    section{margin:18px 0;}
     .card{
-      border:1px solid var(--border); border-radius:16px;
-      padding:16px; background:var(--bg);
+      border:1px solid var(--border); border-radius:16px; padding:16px; background:#fff;
       box-shadow:0 1px 2px rgba(0,0,0,.04);
+      margin:12px 0;
     }
-    h2{margin:0 0 8px; font-size:20px;}
+    h2{margin:0 0 10px; font-size:22px;}
     h3{margin:14px 0 8px; font-size:16px;}
-    .muted{color:var(--muted);}
-    .soft{background:var(--soft); border:1px solid var(--border); border-radius:14px; padding:12px;}
+    .muted{color:var(--muted)}
     code{background:var(--soft); padding:2px 6px; border-radius:10px;}
-    pre{background:var(--soft); border:1px solid var(--border); padding:12px; border-radius:14px; overflow:auto; margin:10px 0 0;}
+    pre{background:var(--soft); border:1px solid var(--border); padding:12px; border-radius:14px; overflow:auto; margin:8px 0 0;}
     ul{margin:8px 0 0 20px;}
-    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;}
-    label{display:block; font-size:13px; color:var(--muted); font-weight:700; margin-bottom:6px;}
+    .grid{display:grid; gap:12px;}
+    @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr;} }
+    label{display:block; font-size:13px; color:var(--muted); font-weight:800; margin-bottom:6px;}
     input, select{
       font-size:16px; padding:10px 12px; border-radius:12px; border:1px solid var(--border);
-      background:var(--bg); min-width:120px;
+      background:#fff; min-width:140px;
     }
-    .kpi{font-size:18px; font-weight:800;}
-    .alert{
-      border-radius:14px; padding:10px 12px; border:1px solid var(--border);
-      background:var(--soft);
-    }
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;}
+    .callout{border-left:5px solid var(--accent); background:var(--soft); padding:12px; border-radius:14px; }
+    .alert{padding:10px 12px; border-radius:14px; border:1px solid var(--border); background:var(--soft); margin-top:10px;}
     .ok{background:var(--goodbg); border-color:var(--goodbd);}
     .no{background:var(--badbg); border-color:var(--badbd);}
-    .hr{height:1px; background:var(--border); margin:12px 0;}
-    details{margin-top:8px;}
-    summary{cursor:pointer; font-weight:700;}
+    .big{font-size:18px; font-weight:900;}
+    details summary{cursor:pointer; font-weight:800;}
     .tiny{font-size:13px;}
-    .scorebox{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
-    .score{padding:6px 10px; border-radius:12px; border:1px solid var(--border); background:var(--soft);}
-    .footer{margin-top:18px; color:var(--muted); font-size:13px;}
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
+    .footer{margin-top:22px; color:var(--muted); font-size:13px;}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Permutations <span class="pill">Order matters</span></h1>
-        <p class="tagline">Built for test success: decide fast → calculate clean → practice like an exam.</p>
+<div class="wrap">
+  <header>
+    <h1>Permutations <span class="tag">Order matters</span></h1>
+    <p class="sub">Clear sections. No fluff. Built to match how tests actually ask this.</p>
+  </header>
+
+  <nav>
+    <div class="row">
+      <a class="navlink" href="#learn">LEARN</a>
+      <a class="navlink" href="#examples">EXAMPLES</a>
+      <a class="navlink" href="#practice">PRACTICE</a>
+      <button class="btn" id="btnNewPractice" type="button">New practice set</button>
+      <button class="btn primary" id="btnReset" type="button">Reset score</button>
+    </div>
+  </nav>
+
+  <!-- ================= LEARN ================= -->
+  <section id="learn">
+    <h2>LEARN</h2>
+
+    <div class="card">
+      <h3>1) The rule (memorize this)</h3>
+      <div class="callout">
+        <div class="big">If changing the order changes the outcome → it’s a permutation.</div>
+        <p class="muted tiny" style="margin:6px 0 0;">That’s it. If you can decide this fast, everything else becomes easy.</p>
       </div>
-      <div class="top-actions">
-        <button class="btn ghost" id="btnJumpPractice" type="button">Jump to practice</button>
-        <button class="btn" id="btnResetScore" type="button">Reset score</button>
-        <button class="btn primary" id="btnNewQuestion" type="button">New practice question</button>
-      </div>
-    </header>
+
+      <h3>2) Quick signals (how tests hint it)</h3>
+      <ul>
+        <li><b>Ranks / placements:</b> 1st, 2nd, 3rd</li>
+        <li><b>Jobs / roles:</b> President, Vice, Treasurer</li>
+        <li><b>Codes:</b> passwords, PINs, license plates</li>
+      </ul>
+
+      <h3>3) The math</h3>
+      <p>Arranging <b>r</b> items chosen from <b>n</b> distinct items (no repeats):</p>
+      <pre><code>P(n,r) = n! / (n-r)!</code></pre>
+      <p class="muted tiny">But on most tests, the fastest method is: multiply down for <b>r</b> spots.</p>
+      <pre><code>n · (n-1) · (n-2) · ...  (r terms total)</code></pre>
+
+      <details>
+        <summary>Common mistake (read once)</summary>
+        <p class="muted">Students often compute when the question was actually “choose a group” (committee/toppings). If there are no roles or ranks, it’s usually NOT a permutation.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= EXAMPLES ================= -->
+  <section id="examples">
+    <h2>EXAMPLES</h2>
 
     <div class="grid">
-
-      <!-- LEFT COLUMN: TEACHING FLOW -->
       <div class="card">
-        <h2>1) Decide before you calculate (this is where most people fail)</h2>
-        <div class="soft">
-          <p style="margin:0 0 8px;"><b>One question:</b> If I swap the order, does the outcome change?</p>
-          <ul>
-            <li><b>Different roles / ranks</b> (1st/2nd/3rd, President/Vice, Captain/Assistant) → <b>Permutation</b></li>
-            <li><b>Codes</b> (PIN, password, license plate) → <b>Permutation</b></li>
-            <li><b>Just choosing a group</b> (committee, toppings) → <b>Not a permutation</b></li>
-          </ul>
-          <p class="muted tiny" style="margin:10px 0 0;">Exam shortcut: if the question names jobs/positions, it’s order.</p>
+        <h3>Example 1 — Podium</h3>
+        <p><b>Question:</b> How many ways can gold, silver, and bronze be awarded among 12 runners?</p>
+        <p><b>Decision:</b> Different ranks → order matters → permutation.</p>
+        <p><b>Work:</b> 3 spots → multiply down 3 times:</p>
+        <pre><code>12 · 11 · 10 = 1320</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>Example 2 — Roles</h3>
+        <p><b>Question:</b> Choose a President, Vice-President, and Treasurer from 25 students.</p>
+        <p><b>Decision:</b> Different roles → order matters → permutation.</p>
+        <p><b>Work:</b> 3 positions:</p>
+        <pre><code>25 · 24 · 23 = 13800</code></pre>
+      </div>
+
+      <div class="card">
+        <h3>Example 3 — The “not a permutation” trap</h3>
+        <p><b>Question:</b> Choose 5 students from 30 for a committee.</p>
+        <p><b>Decision:</b> No roles/ranks → order doesn’t matter → NOT a permutation.</p>
+        <div class="alert no">
+          This is a <b>combination</b> problem, not a permutation problem.
         </div>
+      </div>
 
-        <div class="hr"></div>
-
-        <h2>2) The math (no fluff)</h2>
-        <p>Arranging <b>r</b> items chosen from <b>n</b> distinct items (no repeats):</p>
-        <pre><code>P(n,r) = n! / (n-r)!</code></pre>
-        <p class="muted tiny">But you almost never need factorials. Think “multiply down for r spots”.</p>
-
-        <div class="soft" style="margin-top:10px;">
-          <p style="margin:0 0 6px;"><b>Worked example:</b> podium (gold/silver/bronze) from 12 runners</p>
-          <p style="margin:0 0 6px;">There are <b>3 spots</b>, so multiply down 3 times:</p>
-          <p style="margin:0;"><code>12 · 11 · 10 = 1320</code></p>
-        </div>
-
-        <div class="hr"></div>
-
-        <h2>3) Calculator (P(n,r))</h2>
+      <div class="card">
+        <h3>Calculator (P(n,r))</h3>
         <div class="row">
           <div>
-            <label for="n">n (total choices)</label>
+            <label for="n">n</label>
             <input id="n" type="number" min="0" value="10" />
           </div>
           <div>
-            <label for="r">r (spots / positions)</label>
+            <label for="r">r</label>
             <input id="r" type="number" min="0" value="4" />
           </div>
           <div>
-            <button class="btn primary" type="button" id="btnCalc">Calculate</button>
+            <button class="btn primary" id="btnCalc" type="button">Calculate</button>
           </div>
         </div>
-        <div id="calcMsg" class="alert" style="margin-top:10px;">
-          <span class="kpi" id="calcOut">P(10,4) = 5040</span>
-          <div class="muted tiny" id="calcSteps" style="margin-top:4px;">10 · 9 · 8 · 7</div>
-        </div>
 
-        <details>
-          <summary>Common exam traps (read once)</summary>
-          <ul>
-            <li><b>Committee</b> is not order. If it’s “pick 5 students” → not permutation.</li>
-            <li><b>With repeats allowed</b> changes everything (ex: PIN with repeats).</li>
-            <li><b>Words like “arrange”, “rank”, “assign roles”</b> are permutation signals.</li>
-          </ul>
-        </details>
-      </div>
-
-      <!-- RIGHT COLUMN: INTERACTION / QUIZ -->
-      <div class="card" id="practice">
-        <h2>Practice Mode</h2>
-        <p class="muted">Answer fast. Then check. You’re training recognition.</p>
-
-        <div class="scorebox">
-          <div class="score"><b>Score:</b> <span id="score">0</span></div>
-          <div class="score"><b>Streak:</b> <span id="streak">0</span></div>
-          <div class="score"><b>Questions:</b> <span id="count">0</span></div>
-        </div>
-
-        <div class="hr"></div>
-
-        <h3>A) Is it a permutation?</h3>
-        <div class="soft">
-          <div class="muted tiny">Scenario</div>
-          <div style="font-weight:800; margin-top:4px;" id="scenarioText"></div>
-
-          <div class="row" style="margin-top:10px;">
-            <button class="btn" type="button" id="btnPerm">Permutation</button>
-            <button class="btn" type="button" id="btnNotPerm">Not permutation</button>
-          </div>
-
-          <div id="scenarioResult" class="alert" style="margin-top:10px; display:none;"></div>
-        </div>
-
-        <div class="hr"></div>
-
-        <h3>B) Compute P(n,r)</h3>
-        <div class="soft">
-          <div class="muted tiny">Question</div>
-          <div style="font-weight:800; margin-top:4px;" id="practiceQ"></div>
-
-          <div class="row" style="margin-top:10px;">
-            <div style="flex:1; min-width:220px;">
-              <label for="answer">Your answer</label>
-              <input id="answer" type="number" inputmode="numeric" placeholder="Type a number" />
-            </div>
-            <div>
-              <button class="btn primary" type="button" id="btnCheck">Check</button>
-            </div>
-            <div>
-              <button class="btn" type="button" id="btnReveal">Reveal</button>
-            </div>
-          </div>
-
-          <div id="practiceResult" class="alert" style="margin-top:10px; display:none;"></div>
-        </div>
-
-        <div class="footer">
-          Want to link this from GoDaddy? Use a button that says <b>Start Lesson →</b> and point it to this page.
+        <div id="calcBox" class="alert ok">
+          <div class="big" id="calcOut">P(10,4) = 5040</div>
+          <div class="muted tiny" id="calcSteps">10 · 9 · 8 · 7</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ================= PRACTICE ================= -->
+  <section id="practice">
+    <h2>PRACTICE</h2>
+
+    <div class="card">
+      <h3>Score</h3>
+      <p class="muted">You’re training speed + accuracy (like a test).</p>
+      <div class="row">
+        <div class="alert"><b>Correct:</b> <span id="score">0</span></div>
+        <div class="alert"><b>Streak:</b> <span id="streak">0</span></div>
+        <div class="alert"><b>Questions:</b> <span id="count">0</span></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Practice A -->
+      <div class="card">
+        <h3>A) Decide: permutation or not?</h3>
+        <p class="muted tiny">If you can’t decide this, you’ll miss questions even if you can calculate.</p>
+
+        <div class="callout">
+          <div class="muted tiny">Scenario</div>
+          <div class="big" id="scenarioText">...</div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <button class="btn" id="btnPerm" type="button">Permutation</button>
+          <button class="btn" id="btnNotPerm" type="button">Not a permutation</button>
+        </div>
+
+        <div id="scenarioResult" class="alert" style="display:none;"></div>
+      </div>
+
+      <!-- Practice B -->
+      <div class="card">
+        <h3>B) Calculate</h3>
+        <p class="muted tiny">These are direct test-style “compute P(n,r)” questions.</p>
+
+        <div class="callout">
+          <div class="muted tiny">Question</div>
+          <div class="big" id="practiceQ">...</div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div style="flex:1; min-width:220px;">
+            <label for="answer">Your answer</label>
+            <input id="answer" type="number" placeholder="Type a number" />
+          </div>
+          <div>
+            <button class="btn primary" id="btnCheck" type="button">Check</button>
+          </div>
+          <div>
+            <button class="btn" id="btnReveal" type="button">Reveal</button>
+          </div>
+        </div>
+
+        <div id="practiceResult" class="alert" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Next upgrade options: (1) “with repeats allowed” toggle, (2) timed quiz mode, (3) Manitoba word problems.
+    </div>
+  </section>
+</div>
 
 <script>
-  // ---------- helpers ----------
+  // helpers
   function randInt(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
-
   function permValue(n, r){
     if (r > n) return 0;
     let out = 1;
     for (let k = 0; k < r; k++) out *= (n - k);
     return out;
   }
-
   function permSteps(n, r){
     if (r > n) return "r > n → 0";
-    const terms = [];
-    for (let k = 0; k < r; k++) terms.push(String(n - k));
-    return terms.join(" · ");
+    const t = [];
+    for (let k = 0; k < r; k++) t.push(String(n - k));
+    return t.join(" · ");
   }
 
-  // ---------- calculator ----------
+  // calculator
   const nEl = document.getElementById("n");
   const rEl = document.getElementById("r");
   const calcOut = document.getElementById("calcOut");
-  const calcSteps = document.getElementById("calcSteps");
-  const calcMsg = document.getElementById("calcMsg");
+  const calcStepsEl = document.getElementById("calcSteps");
+  const calcBox = document.getElementById("calcBox");
 
   function updateCalc(){
     const n = parseInt(nEl.value, 10);
     const r = parseInt(rEl.value, 10);
 
-    if (Number.isNaN(n) || Number.isNaN(r) || n < 0 || r < 0){
-      calcMsg.className = "alert no";
+    if (!Number.isFinite(n) || !Number.isFinite(r) || n < 0 || r < 0){
+      calcBox.className = "alert no";
       calcOut.textContent = "Enter valid n and r (≥ 0).";
-      calcSteps.textContent = "";
+      calcStepsEl.textContent = "";
       return;
     }
-
-    const val = permValue(n, r);
-    calcMsg.className = "alert ok";
-    calcOut.textContent = `P(${n},${r}) = ${val}`;
-    calcSteps.textContent = permSteps(n, r);
+    calcBox.className = "alert ok";
+    calcOut.textContent = `P(${n},${r}) = ${permValue(n,r)}`;
+    calcStepsEl.textContent = permSteps(n,r);
   }
-
   document.getElementById("btnCalc").addEventListener("click", updateCalc);
   updateCalc();
 
-  // ---------- score ----------
+  // score
   let score = 0, streak = 0, count = 0;
+  const scoreEl = document.getElementById("score");
+  const streakEl = document.getElementById("streak");
+  const countEl = document.getElementById("count");
   function renderScore(){
-    document.getElementById("score").textContent = score;
-    document.getElementById("streak").textContent = streak;
-    document.getElementById("count").textContent = count;
+    scoreEl.textContent = score;
+    streakEl.textContent = streak;
+    countEl.textContent = count;
   }
-  renderScore();
-
   function resetScore(){
     score = 0; streak = 0; count = 0;
     renderScore();
@@ -272,19 +299,16 @@
     document.getElementById("practiceResult").style.display = "none";
     document.getElementById("answer").value = "";
   }
+  document.getElementById("btnReset").addEventListener("click", resetScore);
 
-  document.getElementById("btnResetScore").addEventListener("click", resetScore);
-
-  // ---------- section A: perm or not ----------
+  // Practice A: decision
   const scenarios = [
-    { text: "Awarding gold, silver, and bronze among 12 runners", isPerm: true, why: "Different ranks (gold/silver/bronze) → order matters." },
-    { text: "Choosing 5 students from 30 to form a committee", isPerm: false, why: "A committee has no order. Same group = same result." },
-    { text: "Creating a 4-digit PIN with no repeated digits", isPerm: true, why: "1234 ≠ 4321 → order matters." },
-    { text: "Picking 3 pizza toppings from 10 options", isPerm: false, why: "Toppings are a set. Order doesn’t change the final pizza." },
-    { text: "Assigning Captain and Assistant Captain from 18 players", isPerm: true, why: "Two different roles → order matters." },
-    { text: "Selecting 6 people to ride in a car (no seat assignments)", isPerm: false, why: "No positions/roles → just a group." },
+    { text:"Awarding gold, silver, and bronze among 12 runners", isPerm:true, why:"Ranks (gold/silver/bronze) are different outcomes → order matters." },
+    { text:"Choosing 5 students from 30 to form a committee", isPerm:false, why:"No roles/ranks → it’s just a group → order doesn’t matter." },
+    { text:"Creating a 4-digit PIN with no repeated digits", isPerm:true, why:"1234 ≠ 4321 → order matters." },
+    { text:"Picking 3 pizza toppings from 10 options", isPerm:false, why:"Toppings are a set → order doesn’t matter." },
+    { text:"Assigning Captain and Assistant Captain from 18 players", isPerm:true, why:"Two different roles → order matters." }
   ];
-
   let currentScenario = null;
   const scenarioText = document.getElementById("scenarioText");
   const scenarioResult = document.getElementById("scenarioResult");
@@ -296,116 +320,94 @@
     scenarioResult.className = "alert";
     scenarioResult.textContent = "";
   }
-
-  function answerScenario(userSaysPerm){
-    if (!currentScenario) return;
-    const correct = (userSaysPerm === currentScenario.isPerm);
-
+  function answerScenario(userPerm){
+    const correct = (userPerm === currentScenario.isPerm);
     count += 1;
     if (correct){
-      score += 1;
-      streak += 1;
+      score += 1; streak += 1;
       scenarioResult.className = "alert ok";
       scenarioResult.innerHTML = `<b>Correct.</b> ${currentScenario.why}`;
     } else {
       streak = 0;
       scenarioResult.className = "alert no";
-      const correctLabel = currentScenario.isPerm ? "Permutation" : "Not permutation";
-      scenarioResult.innerHTML = `<b>Not quite.</b> Correct answer: <b>${correctLabel}</b>. ${currentScenario.why}`;
+      const label = currentScenario.isPerm ? "Permutation" : "Not a permutation";
+      scenarioResult.innerHTML = `<b>No.</b> Correct answer: <b>${label}</b>. ${currentScenario.why}`;
     }
     scenarioResult.style.display = "block";
     renderScore();
   }
-
   document.getElementById("btnPerm").addEventListener("click", () => answerScenario(true));
   document.getElementById("btnNotPerm").addEventListener("click", () => answerScenario(false));
 
-  // ---------- section B: compute P(n,r) ----------
+  // Practice B: calculate
   const practiceQ = document.getElementById("practiceQ");
-  const answerEl = document.getElementById("answer");
+  const ansEl = document.getElementById("answer");
   const practiceResult = document.getElementById("practiceResult");
-
   let currentPractice = null;
 
-  function newPractice(){
+  function newCalcQuestion(){
     const contexts = [
-      "runners placing 1st/2nd/3rd",
-      "students assigned to President/Vice/Treasurer",
-      "books arranged in the first r spots on a shelf",
-      "players assigned to different positions",
-      "letters used for a code (no repeats)",
+      "podium placements",
+      "roles (President/Vice/Treasurer)",
+      "arranging books in r spots",
+      "assigning players to positions",
+      "codes with no repeats"
     ];
     const n = randInt(6, 18);
     const r = randInt(2, Math.min(7, n));
-    const context = contexts[randInt(0, contexts.length - 1)];
-    const val = permValue(n, r);
-
-    currentPractice = { n, r, context, val };
-    practiceQ.textContent = `Compute P(${n},${r}) — Think: ${context}.`;
-    answerEl.value = "";
+    currentPractice = { n, r, val: permValue(n,r) };
+    const c = contexts[randInt(0, contexts.length - 1)];
+    practiceQ.textContent = `Compute P(${n},${r}) (${c}).`;
+    ansEl.value = "";
     practiceResult.style.display = "none";
-    practiceResult.className = "alert";
-    practiceResult.textContent = "";
   }
 
-  function checkPractice(){
-    if (!currentPractice) return;
-    const user = parseInt(answerEl.value, 10);
-
+  function checkCalc(){
+    const user = parseInt(ansEl.value, 10);
     count += 1;
 
     if (!Number.isFinite(user)){
       streak = 0;
       practiceResult.className = "alert no";
-      practiceResult.innerHTML = `Type a number. Answer is <b>${currentPractice.val}</b>. Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
+      practiceResult.innerHTML = `Type a number. Answer: <b>${currentPractice.val}</b>. Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
       practiceResult.style.display = "block";
       renderScore();
       return;
     }
 
     if (user === currentPractice.val){
-      score += 1;
-      streak += 1;
+      score += 1; streak += 1;
       practiceResult.className = "alert ok";
       practiceResult.innerHTML = `<b>Correct.</b> Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
     } else {
       streak = 0;
       practiceResult.className = "alert no";
-      practiceResult.innerHTML = `<b>No.</b> Correct answer: <b>${currentPractice.val}</b>. Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
+      practiceResult.innerHTML = `<b>No.</b> Correct: <b>${currentPractice.val}</b>. Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
     }
     practiceResult.style.display = "block";
     renderScore();
   }
-
-  function revealPractice(){
-    if (!currentPractice) return;
+  function revealCalc(){
     practiceResult.className = "alert ok";
     practiceResult.innerHTML = `Answer: <b>${currentPractice.val}</b>. Steps: <code>${permSteps(currentPractice.n, currentPractice.r)}</code>`;
     practiceResult.style.display = "block";
   }
+  document.getElementById("btnCheck").addEventListener("click", checkCalc);
+  document.getElementById("btnReveal").addEventListener("click", revealCalc);
+  ansEl.addEventListener("keydown", (e) => { if (e.key === "Enter") checkCalc(); });
 
-  document.getElementById("btnCheck").addEventListener("click", checkPractice);
-  document.getElementById("btnReveal").addEventListener("click", revealPractice);
-
-  // Enter key submits answer
-  answerEl.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") checkPractice();
-  });
-
-  // ---------- top buttons ----------
-  document.getElementById("btnNewQuestion").addEventListener("click", () => {
+  // top button: new practice set
+  function newPracticeSet(){
     newScenario();
-    newPractice();
+    newCalcQuestion();
     document.getElementById("practice").scrollIntoView({behavior:"smooth"});
-  });
-
-  document.getElementById("btnJumpPractice").addEventListener("click", () => {
-    document.getElementById("practice").scrollIntoView({behavior:"smooth"});
-  });
+  }
+  document.getElementById("btnNewPractice").addEventListener("click", newPracticeSet);
 
   // init
+  resetScore();
   newScenario();
-  newPractice();
+  newCalcQuestion();
 </script>
 </body>
 </html>
