@@ -4,35 +4,62 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Permutations | DCT Education</title>
+
   <style>
     :root{
       --text:#0f172a;
       --muted:#475569;
+
       --bg:#ffffff;
+      --soft:#f8fafc;
       --card:#ffffff;
       --border:#e2e8f0;
-      --soft:#f8fafc;
+
       --accent:#2563eb;
+      --accentSoft:#eff6ff;
+
       --goodbg:#ecfdf3;
       --goodbd:#b7f0cd;
+
       --badbg:#fff1f2;
       --badbd:#fecdd3;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.06);
+      --radius: 18px;
+
+      --focus: 0 0 0 3px rgba(37, 99, 235, .25);
     }
+
     /* Dark mode variables via class */
     .dark {
       --text:#f4f6fa;
       --muted:#b8c2d1;
+
       --bg:#181924;
+      --soft:#1e1f2b;
       --card:#23243a;
       --border:#2c2f40;
-      --soft:#1e1f2b;
+
       --accent:#3b82f6;
+      --accentSoft:#1f2a44;
+
       --goodbg:#1c3731;
       --goodbd:#14b88c;
+
       --badbg:#2c1c22;
       --badbd:#dd4366;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.25);
+      --focus: 0 0 0 3px rgba(59, 130, 246, .25);
     }
+
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{transition:none !important}
+    }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -40,43 +67,124 @@
       background:var(--soft);
       line-height:1.55;
     }
-    .wrap{max-width:980px; margin:0 auto; padding:28px 16px 60px;}
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:26px 16px 60px;
+    }
+
+    /* Top header */
     .top{
       background:var(--bg);
       border:1px solid var(--border);
-      border-radius:18px;
+      border-radius:var(--radius);
       padding:18px;
-      box-shadow:0 1px 2px rgba(0,0,0,.04);
+      box-shadow:var(--shadow);
     }
-    h1{margin:0; font-size:30px; letter-spacing:-.02em;}
-    .sub{margin:6px 0 0; color:var(--muted)}
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap;
+
+    .topbar{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    h1{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.02em;
+      line-height:1.15;
+    }
+
+    .sub{
+      margin:6px 0 0;
+      color:var(--muted);
+      max-width:62ch;
+    }
+
+    /* Dark mode toggle */
+    .iconBtn{
+      border:1px solid var(--border);
+      background:var(--soft);
+      color:var(--text);
+      border-radius:14px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-size:16px;
+      line-height:1;
+      box-shadow:0 0 0 rgba(0,0,0,0);
+      transition: transform .12s ease, filter .15s ease, background .15s ease;
+      min-width:44px;
+      min-height:44px;
+      display:grid;
+      place-items:center;
+    }
+    .iconBtn:hover{filter:brightness(.98)}
+    .iconBtn:active{transform:translateY(1px)}
+    .iconBtn:focus{outline:none; box-shadow:var(--focus)}
+
+    /* Sticky nav */
+    .navWrap{
+      position:sticky;
+      top:10px;
+      z-index:10;
       margin-top:14px;
     }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:8px;
+      box-shadow:var(--shadow);
+    }
+
     .pill{
-      display:inline-block;
-      padding:7px 10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
       border-radius:999px;
       border:1px solid var(--border);
       background:var(--soft);
       color:var(--text);
-      font-weight:700;
+      font-weight:900;
       font-size:13px;
       text-decoration:none;
-      transition: background 0.15s, color 0.15s;
+      transition: filter .15s ease, background .15s ease, border-color .15s ease;
     }
     .pill:hover{filter:brightness(.98)}
+    .pill:focus{outline:none; box-shadow:var(--focus)}
+    .pill.isActive{
+      background:var(--accentSoft);
+      border-color:rgba(37, 99, 235, .25);
+    }
+    .dark .pill.isActive{
+      border-color:rgba(59, 130, 246, .25);
+    }
+
     section{margin-top:18px;}
-    .sectionTitle{margin:0 0 10px; font-size:18px; color:var(--muted); font-weight:900; letter-spacing:.02em;}
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--muted);
+      font-weight:900;
+      letter-spacing:.02em;
+    }
+
     .card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:18px;
+      border-radius:var(--radius);
       padding:16px;
-      box-shadow:0 1px 2px rgba(0,0,0,.04);
+      box-shadow:var(--shadow);
       margin:12px 0;
     }
+
     .grid{display:grid; gap:12px;}
     @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr;} }
 
@@ -84,69 +192,66 @@
     h3{margin:12px 0 6px; font-size:16px;}
     .muted{color:var(--muted)}
     .big{font-size:18px; font-weight:900;}
+
     .rule{
       border-left:5px solid var(--accent);
-      background:#eff6ff;
+      background:var(--accentSoft);
       border-radius:14px;
       padding:12px;
-      transition: background 0.15s;
     }
-    .dark .rule{
-      background:#23243a;
-    }
+
     .row{display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;}
-    label{display:block; font-size:13px; color:var(--muted); font-weight:900; margin-bottom:6px;}
-    input, select{
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:900;
+      margin-bottom:6px;
+    }
+
+    input{
       font-size:16px;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid var(--border);
-      background:#fff;
+      background:var(--bg);
       min-width:140px;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
-    .dark input, .dark select {
-      background:var(--card);
-      color:var(--text);
-      border-color:var(--border);
-    }
+    input:focus{outline:none; box-shadow:var(--focus)}
+
     button{
       font-size:14px;
       font-weight:900;
       padding:10px 12px;
       border-radius:14px;
       border:1px solid var(--border);
-      background:#fff;
+      background:var(--bg);
       cursor:pointer;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
+      transition: filter .15s ease, transform .12s ease;
+      min-height:44px;
     }
-    .dark button {
-      background:var(--card);
-      color:var(--text);
-      border-color:var(--border);
-    }
+    button:hover{filter:brightness(.98)}
+    button:active{transform:translateY(1px)}
+    button:focus{outline:none; box-shadow:var(--focus)}
+
     button.primary{
       background:var(--accent);
       border-color:var(--accent);
       color:#fff;
     }
-    button:hover{filter:brightness(.98)}
+
     code{
       background:var(--soft);
       border:1px solid var(--border);
       padding:2px 6px;
       border-radius:10px;
-      font-weight:700;
+      font-weight:800;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
-    .dark code{
-      background:#222334;
-      border-color:var(--border);
-      color:#fffbf7;
-    }
+
     .box{
       border:1px solid var(--border);
       background:var(--soft);
@@ -154,60 +259,56 @@
       padding:12px;
       margin-top:10px;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
+
     .ok{background:var(--goodbg); border-color:var(--goodbd);}
     .no{background:var(--badbg); border-color:var(--badbd);}
-    .dark .ok{background:var(--goodbg); border-color:var(--goodbd);}
-    .dark .no{background:var(--badbg); border-color:var(--badbd);}
-    .kpi{display:flex; gap:10px; flex-wrap:wrap;}
-    .kpi .chip{
-      background:var(--soft);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:8px 10px;
+
+    details summary{
+      cursor:pointer;
       font-weight:900;
-      font-size:14px;
-      color:var(--text);
-      transition: background 0.15s, color 0.15s;
+      padding:6px 0;
     }
-    details summary{cursor:pointer; font-weight:900;}
+    details summary:focus{outline:none; box-shadow:var(--focus); border-radius:10px}
+
     .tiny{font-size:13px;}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="top">
-      <h1>Permutations</h1>
-      <p class="sub">Simple: learn it → see it → practice it.</p>
+      <div class="topbar">
+        <div>
+          <h1>Permutations</h1>
+          <p class="sub">Simple: learn it → see it → practice it.</p>
+        </div>
 
-      <div class="nav">
-        <a class="pill" href="#learn">LEARN</a>
-        <a class="pill" href="#examples">EXAMPLES</a>
-        <a class="pill" href="#practice">PRACTICE</a>
+        <button id="darkModeToggle" class="iconBtn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          🌙
+        </button>
       </div>
-      <!-- Dark mode toggle button (optional, but makes it easy to see switch in use) -->
-      <button id="darkModeToggle" style="float:right; margin-top:-40px;" aria-label="Toggle dark mode">🌙</button>
+
+      <div class="navWrap" aria-label="Section navigation">
+        <nav class="nav">
+          <a class="pill" href="#learn" data-link="learn">LEARN</a>
+          <a class="pill" href="#examples" data-link="examples">EXAMPLES</a>
+          <a class="pill" href="#practice" data-link="practice">PRACTICE</a>
+        </nav>
+      </div>
     </div>
-    <script>
-      // Basic dark mode toggle for demonstration, no persistence
-      document.getElementById('darkModeToggle').onclick = function() {
-        document.body.classList.toggle('dark');
-      };
-    </script>
+
     <!-- LEARN -->
     <section id="learn">
       <div class="sectionTitle">LEARN</div>
       <div class="card">
 
-        <!-- 1. What a permutation is -->
         <h2>What is a permutation?</h2>
         <div class="rule">
           <div class="big">Order matters. Changing the order gives a new result.</div>
           <div class="muted tiny" style="margin-top:6px;">Example: 321 is not the same as 123.</div>
         </div>
 
-        <!-- 2. When to use it (quick checklist) -->
         <h3>When do you use permutations?</h3>
         <ul>
           <li>Different places or prizes (like 1st/2nd/3rd)</li>
@@ -215,7 +316,6 @@
           <li>Anytime the <b>order makes a new answer</b></li>
         </ul>
 
-        <!-- 3. What n and r mean -->
         <h3>What do <code>n</code> and <code>r</code> mean?</h3>
         <div class="grid">
           <div class="box">
@@ -228,29 +328,27 @@
           </div>
         </div>
 
-        <!-- 4. The base formula -->
         <h3>How do you find the answer?</h3>
-        <div class="box" style="margin-bottom:16px;">
+        <div class="box" style="margin-bottom:12px;">
           <b>Super simple:</b><br>
           Start with <code>n</code>.<br>
           Multiply by one less each time, <b>do this <code>r</code> times</b>.<br>
-          (No repeats allowed!)
+          <span class="muted tiny">(No repeats allowed!)</span>
         </div>
-        <div class="muted tiny" style="margin-bottom:16px;">
+
+        <div class="muted tiny" style="margin-bottom:14px;">
           It's just: <code>n × (n-1) × (n-2) ...</code> (stop after <code>r</code> numbers)
         </div>
 
-        <!-- 5. Mini example -->
         <h3>Mini example</h3>
         <div class="box">
           <b>How many ways can 3 people get 1st, 2nd, and 3rd?</b><br>
           <code>3 × 2 × 1 = 6</code>
         </div>
 
-        <!-- Quick test tip -->
-        <details style="margin-top:18px;">
+        <details style="margin-top:16px;">
           <summary>Quick tip: How do I know if it's a permutation?</summary>
-          <p class="muted">If the roles or order matter, it's a permutation.</p>
+          <p class="muted" style="margin-top:6px;">If swapping roles/positions makes a new outcome, it’s a permutation.</p>
         </details>
       </div>
     </section>
@@ -263,7 +361,7 @@
         <div class="card">
           <h2>Example 1: Podium</h2>
           <p>
-            <b>Before you start:</b> <br>
+            <b>Before you start:</b><br>
             <b>n</b> = how many choices you have at the start. Here: 12 runners.<br>
             <b>r</b> = how many spots you are filling. Here: 3 (gold, silver, bronze).
           </p>
@@ -280,7 +378,7 @@
         <div class="card">
           <h2>Example 2: Roles</h2>
           <p>
-            <b>Before you start:</b> <br>
+            <b>Before you start:</b><br>
             <b>n</b> = how many people you can pick from. Here: 25 students.<br>
             <b>r</b> = how many different roles you are assigning. Here: 3 (President, Vice-President, Treasurer).
           </p>
@@ -350,17 +448,15 @@
         </div>
       </div>
 
-      <!-- ---- EXAM-FOCUSED PRACTICE SET ---- -->
       <div class="card">
         <h2 style="margin-bottom:8px;">Exam-Style Permutation Practice</h2>
         <div class="muted tiny" style="margin-bottom:10px;">Try each group. Click "Show solution" to check your work.</div>
+
         <div class="grid">
 
-          <!-- Group 1: People / Lineups -->
           <div>
             <h3 style="margin:0;">1. People / Lineups</h3>
 
-            <!-- Q1 -->
             <div class="box" style="margin-top:8px;">
               <b>Q1.</b> In how many ways can 5 students line up for lunch from a class of 24?
               <details>
@@ -370,7 +466,7 @@
                 Answer: 24 × 23 × 22 × 21 × 20 = <b>5,100,480</b>
               </details>
             </div>
-            <!-- Q2 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q2.</b> In how many ways can President, Vice-President, and Secretary be chosen from 12 students?
               <details>
@@ -380,7 +476,7 @@
                 Answer: 12 × 11 × 10 = <b>1,320</b>
               </details>
             </div>
-            <!-- Q3 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q3.</b> In how many ways can gold, silver, and bronze medals be awarded among 10 runners?
               <details>
@@ -392,11 +488,9 @@
             </div>
           </div>
 
-          <!-- Group 2: Letters / Digits -->
           <div>
             <h3 style="margin:0;">2. Letters / Digits</h3>
 
-            <!-- Q4 -->
             <div class="box" style="margin-top:8px;">
               <b>Q4.</b> How many ways can you make a 4-letter code using the letters A, B, C, D, E, F if each letter is used only once?
               <details>
@@ -406,7 +500,7 @@
                 Answer: 6 × 5 × 4 × 3 = <b>360</b>
               </details>
             </div>
-            <!-- Q5 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q5.</b> You have 8 different digits (0-7). How many different 3-digit numbers can you form if no digit repeats?
               <details>
@@ -416,7 +510,7 @@
                 Answer: 8 × 7 × 6 = <b>336</b>
               </details>
             </div>
-            <!-- Q6 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q6.</b> How many 5-letter “words” can you form from the word PIRATES if each letter is used at most once per word?
               <details>
@@ -428,11 +522,9 @@
             </div>
           </div>
 
-          <!-- Group 3: With restrictions -->
           <div>
             <h3 style="margin:0;">3. Restrictions</h3>
 
-            <!-- Q7 -->
             <div class="box" style="margin-top:8px;">
               <b>Q7.</b> In how many ways can 6 people stand in a line if Ali must be first?
               <details>
@@ -442,35 +534,32 @@
                 Answer: 5 × 4 × 3 × 2 × 1 = <b>120</b>
               </details>
             </div>
-            <!-- Q8 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q8.</b> How many ways can 5 books be arranged on a shelf if Book A and Book B must be together?
               <details>
                 <summary>Show solution</summary>
-                Treat A & B as a single unit: now 4 “items” to arrange (= 4! = 24 ways). A & B can switch order: 2 ways.<br>
+                Treat A &amp; B as a single unit: now 4 “items” to arrange (= 4! = 24 ways). A &amp; B can switch order: 2 ways.<br>
                 n = 5 books, r = 5 spots.<br>
                 So: 4! × 2 = 24 × 2 = <b>48</b>
               </details>
             </div>
-            <!-- Q9 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q9.</b> How many ways can 7 people arrange themselves in a row if Sara and Mia cannot be next to each other?
               <details>
                 <summary>Show solution</summary>
                 First, total arrangements: 7! = 5040.<br>
                 Number where Sara and Mia are together: treat as a “block”: 6! × 2 = 720 × 2 = 1440.<br>
-                Subtract: 5040 – 1440 = <b>3,600</b>
-                <br>
-                n = 7 people, r = 7 spots.
+                Subtract: 5040 − 1440 = <b>3,600</b><br>
+                <span class="muted tiny">n = 7 people, r = 7 spots.</span>
               </details>
             </div>
           </div>
 
-          <!-- Group 4: With repeated items (or extra restrictions) -->
           <div>
             <h3 style="margin:0;">4. With Repeated Items / Harder Restrictions</h3>
 
-            <!-- Q10 -->
             <div class="box" style="margin-top:8px;">
               <b>Q10.</b> How many ways can you order the letters in SUCCESS?
               <details>
@@ -478,10 +567,10 @@
                 The word SUCCESS has 7 letters: S(3), U(1), C(2), E(1).<br>
                 n = 7 total letters.<br>
                 r = 7 because all are arranged.<br>
-                Answer: 7! / (3! × 2! × 1! × 1!) = 5040 / (6×2) = 5040 / 12 = <b>420</b>
+                Answer: 7! / (3! × 2!) = 5040 / 12 = <b>420</b>
               </details>
             </div>
-            <!-- Q11 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q11.</b> In how many ways can the letters of the word LEVEL be arranged?
               <details>
@@ -489,10 +578,10 @@
                 LEVEL: 5 letters, L(2), E(2), V(1)<br>
                 n = 5 total letters.<br>
                 r = 5 since all letters are arranged.<br>
-                Answer: 5! / (2! × 2! × 1!) = 120 / 4 = <b>30</b>
+                Answer: 5! / (2! × 2!) = 120 / 4 = <b>30</b>
               </details>
             </div>
-            <!-- Q12 -->
+
             <div class="box" style="margin-top:8px;">
               <b>Q12.</b> How many ways can the letters of the word BANANA be arranged?
               <details>
@@ -500,11 +589,95 @@
                 BANANA has 6 letters: A(3), N(2), B(1)<br>
                 n = 6 total letters.<br>
                 r = 6, arranging all.<br>
-                Answer: 6! / (3! × 2! × 1!) = 720 / (6×2) = 720 / 12 = <b>60</b>
+                Answer: 6! / (3! × 2!) = 720 / 12 = <b>60</b>
               </details>
             </div>
           </div>
+
         </div>
       </div>
     </section>
   </div>
+
+  <script>
+    // ---------- Dark mode (persisted) ----------
+    const body = document.body;
+    const toggleBtn = document.getElementById('darkModeToggle');
+
+    function setTheme(isDark){
+      body.classList.toggle('dark', isDark);
+      toggleBtn.textContent = isDark ? '☀️' : '🌙';
+      toggleBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      toggleBtn.title = isDark ? 'Light mode' : 'Dark mode';
+      try { localStorage.setItem('dct_theme', isDark ? 'dark' : 'light'); } catch(e){}
+    }
+
+    // Load saved theme, else use system preference
+    (function initTheme(){
+      let saved = null;
+      try { saved = localStorage.getItem('dct_theme'); } catch(e){}
+      if(saved === 'dark') return setTheme(true);
+      if(saved === 'light') return setTheme(false);
+      setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    })();
+
+    toggleBtn.addEventListener('click', () => setTheme(!body.classList.contains('dark')));
+
+    // ---------- Calculator ----------
+    const nInput = document.getElementById('n');
+    const rInput = document.getElementById('r');
+    const out = document.getElementById('calcOut');
+    const steps = document.getElementById('calcSteps');
+    const btn = document.getElementById('btnCalc');
+
+    function calcPerm(n, r){
+      n = Math.floor(Number(n));
+      r = Math.floor(Number(r));
+      if(!Number.isFinite(n) || !Number.isFinite(r) || n < 0 || r < 0) return null;
+      if(r > n) return { val: 0, steps: `${n} · ... (r cannot be bigger than n)` };
+
+      let val = 1;
+      const parts = [];
+      for(let i = 0; i < r; i++){
+        const term = n - i;
+        parts.push(term);
+        val *= term;
+      }
+      return { val, steps: parts.join(' · ') || '—' };
+    }
+
+    function renderCalc(){
+      const n = nInput.value;
+      const r = rInput.value;
+      const result = calcPerm(n, r);
+
+      if(!result){
+        out.textContent = 'Enter valid numbers';
+        steps.textContent = '';
+        return;
+      }
+      out.textContent = `P(${Math.floor(n)},${Math.floor(r)}) = ${result.val.toLocaleString()}`;
+      steps.textContent = result.steps;
+    }
+
+    btn.addEventListener('click', renderCalc);
+    nInput.addEventListener('input', renderCalc);
+    rInput.addEventListener('input', renderCalc);
+    renderCalc();
+
+    // ---------- Active nav highlight ----------
+    const links = Array.from(document.querySelectorAll('.pill[data-link]'));
+    const sections = links.map(a => document.getElementById(a.dataset.link)).filter(Boolean);
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          links.forEach(a => a.classList.toggle('isActive', a.dataset.link === entry.target.id));
+        }
+      });
+    }, { rootMargin: "-35% 0px -60% 0px", threshold: 0.01 });
+
+    sections.forEach(sec => obs.observe(sec));
+  </script>
+</body>
+</html>
