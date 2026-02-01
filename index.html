@@ -141,47 +141,62 @@
         <a class="pill" href="#practice">PRACTICE</a>
       </div>
     </div>
-
     <!-- LEARN -->
     <section id="learn">
       <div class="sectionTitle">LEARN</div>
-
       <div class="card">
+
+        <!-- 1. What a permutation is -->
         <h2>What is a permutation?</h2>
         <div class="rule">
-          <div class="big">If the order changes the answer, it’s a permutation.</div>
-          <div class="muted tiny" style="margin-top:6px;">Example: 1234 is different than 4321 → order matters.</div>
+          <div class="big">Order matters. Changing the order gives a new result.</div>
+          <div class="muted tiny" style="margin-top:6px;">Example: 321 is not the same as 123.</div>
         </div>
 
-        <h3>The 2 numbers you always need: n and r</h3>
-
-        <div class="grid">
-          <div class="box">
-            <div class="big">n = how many choices you start with</div>
-            <p class="muted" style="margin:6px 0 0;">
-              Example: “12 runners” → you start with 12 choices for 1st place → so <code>n = 12</code>
-            </p>
-          </div>
-
-          <div class="box">
-            <div class="big">r = how many spots you are filling</div>
-            <p class="muted" style="margin:6px 0 0;">
-              Example: gold/silver/bronze → 3 spots → so <code>r = 3</code>
-            </p>
-          </div>
-        </div>
-
-        <h3>How to calculate (no confusing formulas)</h3>
-        <p class="muted">If repeats are NOT allowed:</p>
+        <!-- 2. When to use it (quick checklist) -->
+        <h3>When do you use permutations?</h3>
         <ul>
-          <li>Start at <code>n</code></li>
-          <li>Multiply down <code>r</code> times</li>
-          <li>Stop</li>
+          <li>Different places or prizes (like 1st/2nd/3rd)</li>
+          <li>Assigning special jobs or roles</li>
+          <li>Anytime the <b>order makes a new answer</b></li>
         </ul>
 
-        <details>
-          <summary>One sentence test tip</summary>
-          <p class="muted">If the question has different roles/ranks (1st/2nd/3rd, President/Vice), it’s almost always a permutation.</p>
+        <!-- 3. What n and r mean -->
+        <h3>What do <code>n</code> and <code>r</code> mean?</h3>
+        <div class="grid">
+          <div class="box">
+            <div class="big"><code>n</code> = total choices you have</div>
+            <p class="muted" style="margin:6px 0 0;">Example: 8 people in a race → <code>n = 8</code></p>
+          </div>
+          <div class="box">
+            <div class="big"><code>r</code> = number of spots to fill</div>
+            <p class="muted" style="margin:6px 0 0;">Example: 3 medal places → <code>r = 3</code></p>
+          </div>
+        </div>
+
+        <!-- 4. The base formula -->
+        <h3>How do you find the answer?</h3>
+        <div class="box" style="margin-bottom:16px;">
+          <b>Super simple:</b><br>
+          Start with <code>n</code>.<br>
+          Multiply by one less each time, <b>do this <code>r</code> times</b>.<br>
+          (No repeats allowed!)
+        </div>
+        <div class="muted tiny" style="margin-bottom:16px;">
+          It's just: <code>n × (n-1) × (n-2) ...</code> (stop after <code>r</code> numbers)
+        </div>
+
+        <!-- 5. Mini example -->
+        <h3>Mini example</h3>
+        <div class="box">
+          <b>How many ways can 3 people get 1st, 2nd, and 3rd?</b><br>
+          <code>3 × 2 × 1 = 6</code>
+        </div>
+
+        <!-- Quick test tip -->
+        <details style="margin-top:18px;">
+          <summary>Quick tip: How do I know if it's a permutation?</summary>
+          <p class="muted">If the roles or order matter, it's a permutation.</p>
         </details>
       </div>
     </section>
