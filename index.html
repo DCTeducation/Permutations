@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Permutations | DCT Education</title>
+
   <style>
     :root{
       --text:#0f172a;
@@ -18,7 +19,7 @@
       --badbg:#fff1f2;
       --badbd:#fecdd3;
     }
-    /* Dark mode variables via class */
+
     .dark {
       --text:#f4f6fa;
       --muted:#b8c2d1;
@@ -32,6 +33,7 @@
       --badbg:#2c1c22;
       --badbd:#dd4366;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -41,6 +43,7 @@
       line-height:1.55;
       overflow-x:hidden;
     }
+
     .wrap{
       max-width:980px;
       margin:0 auto;
@@ -49,6 +52,7 @@
       padding-right:max(16px,env(safe-area-inset-right));
       padding-bottom:max(60px,env(safe-area-inset-bottom));
     }
+
     .top{
       background:var(--bg);
       border:1px solid var(--border);
@@ -56,19 +60,18 @@
       padding:18px;
       box-shadow:0 1px 2px rgba(0,0,0,.04);
     }
+
     .topHeader{
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
       gap:12px;
     }
-    .topHeader h1{flex:1; min-width:0;}
+
     h1{margin:0; font-size:clamp(24px,5vw,30px); letter-spacing:-.02em;}
     .sub{margin:6px 0 0; color:var(--muted)}
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:14px;
-    }
+
+    .nav{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
     .pill{
       display:inline-block;
       padding:7px 10px;
@@ -79,9 +82,8 @@
       font-weight:700;
       font-size:13px;
       text-decoration:none;
-      transition: background 0.15s, color 0.15s;
     }
-    .pill:hover{filter:brightness(.98)}
+
     section{margin-top:18px;}
     .sectionTitle{margin:0 0 10px; font-size:18px; color:var(--muted); font-weight:900; letter-spacing:.02em;}
     .card{
@@ -92,31 +94,22 @@
       box-shadow:0 1px 2px rgba(0,0,0,.04);
       margin:12px 0;
     }
+
     .grid{display:grid; gap:12px;}
     @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr;} }
 
-    h2{margin:0 0 8px; font-size:20px;}
-    h3{margin:12px 0 6px; font-size:16px;}
-    .muted{color:var(--muted)}
-    .big{font-size:18px; font-weight:900;}
     .rule{
       border-left:5px solid var(--accent);
       background:#eff6ff;
       border-radius:14px;
       padding:12px;
-      transition: background 0.15s;
     }
-    .dark .rule{
-      background:#23243a;
-    }
-    .row{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:flex-end;
-    }
+    .dark .rule{ background:#23243a; }
+
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;}
     label{display:block; font-size:13px; color:var(--muted); font-weight:900; margin-bottom:6px;}
-    input, select{
+
+    input{
       font-size:16px;
       padding:10px 12px;
       border-radius:14px;
@@ -126,13 +119,9 @@
       width:100%;
       max-width:160px;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
-    .dark input, .dark select {
-      background:var(--card);
-      color:var(--text);
-      border-color:var(--border);
-    }
+    .dark input{ background:var(--card); }
+
     button{
       font-size:14px;
       font-weight:900;
@@ -142,24 +131,17 @@
       background:#fff;
       cursor:pointer;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
-    .dark button {
-      background:var(--card);
-      color:var(--text);
-      border-color:var(--border);
-    }
+    .dark button{ background:var(--card); }
+
     button.primary{
       background:var(--accent);
       border-color:var(--accent);
       color:#fff;
     }
-    .darkToggle{
-      flex-shrink:0;
-      min-width:44px;
-      min-height:44px;
-    }
-    button:hover{filter:brightness(.98)}
+
+    .darkToggle{min-width:44px; min-height:44px;}
+
     code{
       background:var(--soft);
       border:1px solid var(--border);
@@ -167,13 +149,8 @@
       border-radius:10px;
       font-weight:700;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
-    .dark code{
-      background:#222334;
-      border-color:var(--border);
-      color:#fffbf7;
-    }
+
     .box{
       border:1px solid var(--border);
       background:var(--soft);
@@ -181,61 +158,28 @@
       padding:12px;
       margin-top:10px;
       color:var(--text);
-      transition: background 0.15s, color 0.15s;
     }
+
     .ok{background:var(--goodbg); border-color:var(--goodbd);}
     .no{background:var(--badbg); border-color:var(--badbd);}
-    .dark .ok{background:var(--goodbg); border-color:var(--goodbd);}
-    .dark .no{background:var(--badbg); border-color:var(--badbd);}
-    .kpi{display:flex; gap:10px; flex-wrap:wrap;}
-    .kpi .chip{
-      background:var(--soft);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:8px 10px;
-      font-weight:900;
-      font-size:14px;
-      color:var(--text);
-      transition: background 0.15s, color 0.15s;
-    }
+
     details summary{cursor:pointer; font-weight:900;}
     .tiny{font-size:13px;}
-    /* Responsive: mobile-first */
+
     @media (max-width:600px){
       .wrap{padding:16px 12px 48px;}
       .top{padding:14px;}
       .topHeader{flex-wrap:wrap;}
       .nav{gap:8px;}
-      .pill{
-        padding:10px 14px;
-        min-height:44px;
-        display:inline-flex;
-        align-items:center;
-      }
+      .pill{padding:10px 14px; min-height:44px; display:inline-flex; align-items:center;}
       .card{padding:14px;}
-      .big{font-size:16px;}
       .row{flex-direction:column; align-items:stretch;}
-      .row > div{min-width:0;}
-      input, select{max-width:none;}
+      input{max-width:none;}
       button.primary{min-height:44px; width:100%;}
     }
-    @media (min-width:601px){
-      .row > div{min-width:120px;}
-    }
-    @media (min-width:768px){
-      .wrap{padding:24px 20px 60px;}
-    }
-    @media (min-width:900px){
-      .grid{grid-template-columns:1fr 1fr;}
-      .practiceGrid{grid-template-columns:1fr 1fr;}
-    }
-    @media (min-width:1200px){
-      .practiceGrid{grid-template-columns:repeat(4,1fr);}
-    }
-    .practiceGrid{grid-template-columns:1fr;}
-    p, li, .box{word-wrap:break-word; overflow-wrap:break-word;}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="top">
