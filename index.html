@@ -193,29 +193,49 @@
       <div class="grid">
         <div class="card">
           <h2>Example 1: Podium</h2>
-          <p><b>Question:</b> How many ways to award gold, silver, and bronze among 12 runners?</p>
-          <p><b>n</b> = 12 (runners)</p>
-          <p><b>r</b> = 3 (gold, silver, bronze)</p>
+          <p>
+            <b>Before you start:</b> <br>
+            <b>n</b> = how many choices you have at the start. Here: 12 runners.<br>
+            <b>r</b> = how many spots you are filling. Here: 3 (gold, silver, bronze).
+          </p>
+          <p><b>Question:</b> How many ways can gold, silver, and bronze medals be given out among 12 runners?</p>
+          <p><b>Why does order matter?</b><br>
+            Gold, silver, and bronze are different places—giving Alice gold and Bob silver is NOT the same as giving Bob gold and Alice silver.
+          </p>
           <div class="box">
-            Multiply down 3 times: <code>12 · 11 · 10 = 1320</code>
+            <b>Math:</b> Start at 12 and multiply down 3 times: <code>12 · 11 · 10 = 1320</code>
           </div>
+          <p><b>Why this is a permutation:</b> The order you give out the medals changes who wins what, so each arrangement is unique.</p>
         </div>
 
         <div class="card">
           <h2>Example 2: Roles</h2>
-          <p><b>Question:</b> Choose President, Vice-President, Treasurer from 25 students.</p>
-          <p><b>n</b> = 25 (students)</p>
-          <p><b>r</b> = 3 (3 roles)</p>
+          <p>
+            <b>Before you start:</b> <br>
+            <b>n</b> = how many people you can pick from. Here: 25 students.<br>
+            <b>r</b> = how many different roles you are assigning. Here: 3 (President, Vice-President, Treasurer).
+          </p>
+          <p><b>Question:</b> In how many ways can you assign President, Vice-President, and Treasurer from 25 students?</p>
+          <p><b>Why does order matter?</b><br>
+            Each role is different. Assigning Sam as President and Maria as Treasurer is NOT the same as Maria as President and Sam as Treasurer.
+          </p>
           <div class="box">
-            Multiply down 3 times: <code>25 · 24 · 23 = 13800</code>
+            <b>Math:</b> Start at 25 and multiply down 3 times: <code>25 · 24 · 23 = 13,800</code>
           </div>
+          <p><b>Why this is a permutation:</b> The order of the roles changes the result. Each assignment gives different students different jobs.</p>
         </div>
 
         <div class="card">
           <h2>Example 3: Not a permutation</h2>
-          <p><b>Question:</b> Choose 5 students for a committee.</p>
+          <p>
+            <b>Before you start:</b><br>
+            <b>n</b> = total students to pick from. Here: 18 students (for example).<br>
+            <b>r</b> = number to choose for the committee. Here: 5.
+          </p>
+          <p><b>Question:</b> How many ways can you choose 5 students to be on a committee?</p>
           <div class="box no">
-            <b>Not a permutation.</b> A committee has no order. (This is combinations.)
+            <b>Not a permutation.</b> On a committee, the order does NOT matter—just who is in the group. Order doesn’t create a new outcome.<br>
+            <b>This is a combination problem, not a permutation.</b>
           </div>
         </div>
 
