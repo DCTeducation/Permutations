@@ -270,253 +270,172 @@
       <div class="sectionTitle">PRACTICE</div>
 
       <div class="card">
-        <div class="row" style="justify-content:space-between;">
-          <div>
-            <h2 style="margin-bottom:4px;">Practice set</h2>
-            <div class="muted tiny">Do A (decide) then B (calculate). That’s how tests work.</div>
-          </div>
-          <div class="row">
-            <button id="btnNew" type="button">New questions</button>
-            <button id="btnReset" type="button">Reset score</button>
-          </div>
-        </div>
-
-        <div class="kpi" style="margin-top:10px;">
-          <div class="chip">Correct: <span id="score">0</span></div>
-          <div class="chip">Streak: <span id="streak">0</span></div>
-          <div class="chip">Questions: <span id="count">0</span></div>
+        <h2 style="margin-bottom:8px;">Permutation Check</h2>
+        <div class="box">
+          <b>Is it a permutation?</b>
+          <ul style="margin:8px 0 4px 20px;">
+            <li>Roles or spots are different <span class="muted tiny">(e.g., President vs. Secretary)</span></li>
+            <li>Order matters for the outcome <span class="muted tiny">(e.g., first place ≠ second place)</span></li>
+            <li>Each arrangement creates a new result</li>
+          </ul>
         </div>
       </div>
 
-      <div class="grid">
-        <!-- A -->
-        <div class="card">
-          <h2>A) Decide</h2>
-          <p class="muted tiny">Question: Is it a permutation?</p>
+      <!-- ---- EXAM-FOCUSED PRACTICE SET ---- -->
+      <div class="card">
+        <h2 style="margin-bottom:8px;">Exam-Style Permutation Practice</h2>
+        <div class="muted tiny" style="margin-bottom:10px;">Try each group. Click "Show solution" to check your work.</div>
+        <div class="grid">
 
-          <div class="box">
-            <div class="muted tiny">Scenario</div>
-            <div class="big" id="scenarioText">...</div>
-          </div>
+          <!-- Group 1: People / Lineups -->
+          <div>
+            <h3 style="margin:0;">1. People / Lineups</h3>
 
-          <div class="row" style="margin-top:10px;">
-            <button id="btnPerm" type="button">Permutation</button>
-            <button id="btnNot" type="button">Not permutation</button>
-          </div>
-
-          <div id="scenarioResult" class="box" style="display:none;"></div>
-        </div>
-
-        <!-- B -->
-        <div class="card">
-          <h2>B) Calculate</h2>
-          <p class="muted tiny">Find n and r, then multiply down.</p>
-
-          <div class="box">
-            <div class="muted tiny">Question</div>
-            <div class="big" id="practiceQ">...</div>
-            <div class="muted tiny" id="hint"></div>
-          </div>
-
-          <div class="row" style="margin-top:10px;">
-            <div style="flex:1; min-width:220px;">
-              <label for="answer">Your answer</label>
-              <input id="answer" type="number" placeholder="Type a number" />
+            <!-- Q1 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q1.</b> In how many ways can 5 students line up for lunch from a class of 24?
+              <details>
+                <summary>Show solution</summary>
+                n = 24 because there are 24 students to choose from.<br>
+                r = 5 because we are arranging 5 in a line.<br>
+                Answer: 24 × 23 × 22 × 21 × 20 = <b>5,100,480</b>
+              </details>
             </div>
-            <div>
-              <button class="primary" id="btnCheck" type="button">Check</button>
+            <!-- Q2 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q2.</b> In how many ways can President, Vice-President, and Secretary be chosen from 12 students?
+              <details>
+                <summary>Show solution</summary>
+                n = 12 because there are 12 students eligible.<br>
+                r = 3 because there are 3 different positions.<br>
+                Answer: 12 × 11 × 10 = <b>1,320</b>
+              </details>
             </div>
-            <div>
-              <button id="btnReveal" type="button">Reveal</button>
+            <!-- Q3 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q3.</b> In how many ways can gold, silver, and bronze medals be awarded among 10 runners?
+              <details>
+                <summary>Show solution</summary>
+                n = 10 because there are 10 runners.<br>
+                r = 3 because there are 3 distinct medals.<br>
+                Answer: 10 × 9 × 8 = <b>720</b>
+              </details>
             </div>
           </div>
 
-          <div id="practiceResult" class="box" style="display:none;"></div>
+          <!-- Group 2: Letters / Digits -->
+          <div>
+            <h3 style="margin:0;">2. Letters / Digits</h3>
+
+            <!-- Q4 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q4.</b> How many ways can you make a 4-letter code using the letters A, B, C, D, E, F if each letter is used only once?
+              <details>
+                <summary>Show solution</summary>
+                n = 6 because there are 6 letters to choose from.<br>
+                r = 4 because the code is 4 letters long.<br>
+                Answer: 6 × 5 × 4 × 3 = <b>360</b>
+              </details>
+            </div>
+            <!-- Q5 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q5.</b> You have 8 different digits (0-7). How many different 3-digit numbers can you form if no digit repeats?
+              <details>
+                <summary>Show solution</summary>
+                n = 8 because there are 8 digits available.<br>
+                r = 3 because the number has 3 digits.<br>
+                Answer: 8 × 7 × 6 = <b>336</b>
+              </details>
+            </div>
+            <!-- Q6 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q6.</b> How many 5-letter “words” can you form from the word PIRATES if each letter is used at most once per word?
+              <details>
+                <summary>Show solution</summary>
+                n = 7 because "PIRATES" has 7 distinct letters.<br>
+                r = 5 because each "word" uses 5 letters.<br>
+                Answer: 7 × 6 × 5 × 4 × 3 = <b>2,520</b>
+              </details>
+            </div>
+          </div>
+
+          <!-- Group 3: With restrictions -->
+          <div>
+            <h3 style="margin:0;">3. Restrictions</h3>
+
+            <!-- Q7 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q7.</b> In how many ways can 6 people stand in a line if Ali must be first?
+              <details>
+                <summary>Show solution</summary>
+                n = 5 because after Ali (already placed first), 5 people are left.<br>
+                r = 5 because there are 5 spots left to fill.<br>
+                Answer: 5 × 4 × 3 × 2 × 1 = <b>120</b>
+              </details>
+            </div>
+            <!-- Q8 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q8.</b> How many ways can 5 books be arranged on a shelf if Book A and Book B must be together?
+              <details>
+                <summary>Show solution</summary>
+                Treat A & B as a single unit: now 4 “items” to arrange (= 4! = 24 ways). A & B can switch order: 2 ways.<br>
+                n = 5 books, r = 5 spots.<br>
+                So: 4! × 2 = 24 × 2 = <b>48</b>
+              </details>
+            </div>
+            <!-- Q9 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q9.</b> How many ways can 7 people arrange themselves in a row if Sara and Mia cannot be next to each other?
+              <details>
+                <summary>Show solution</summary>
+                First, total arrangements: 7! = 5040.<br>
+                Number where Sara and Mia are together: treat as a “block”: 6! × 2 = 720 × 2 = 1440.<br>
+                Subtract: 5040 – 1440 = <b>3,600</b>
+                <br>
+                n = 7 people, r = 7 spots.
+              </details>
+            </div>
+          </div>
+
+          <!-- Group 4: With repeated items (or extra restrictions) -->
+          <div>
+            <h3 style="margin:0;">4. With Repeated Items / Harder Restrictions</h3>
+
+            <!-- Q10 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q10.</b> How many ways can you order the letters in SUCCESS?
+              <details>
+                <summary>Show solution</summary>
+                The word SUCCESS has 7 letters: S(3), U(1), C(2), E(1).<br>
+                n = 7 total letters.<br>
+                r = 7 because all are arranged.<br>
+                Answer: 7! / (3! × 2! × 1! × 1!) = 5040 / (6×2) = 5040 / 12 = <b>420</b>
+              </details>
+            </div>
+            <!-- Q11 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q11.</b> In how many ways can the letters of the word LEVEL be arranged?
+              <details>
+                <summary>Show solution</summary>
+                LEVEL: 5 letters, L(2), E(2), V(1)<br>
+                n = 5 total letters.<br>
+                r = 5 since all letters are arranged.<br>
+                Answer: 5! / (2! × 2! × 1!) = 120 / 4 = <b>30</b>
+              </details>
+            </div>
+            <!-- Q12 -->
+            <div class="box" style="margin-top:8px;">
+              <b>Q12.</b> How many ways can the letters of the word BANANA be arranged?
+              <details>
+                <summary>Show solution</summary>
+                BANANA has 6 letters: A(3), N(2), B(1)<br>
+                n = 6 total letters.<br>
+                r = 6, arranging all.<br>
+                Answer: 6! / (3! × 2! × 1!) = 720 / (6×2) = 720 / 12 = <b>60</b>
+              </details>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </div>
-
-<script>
-  // Helpers
-  function randInt(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
-
-  function multiplyDownValue(n, r){
-    if (r > n) return 0;
-    let out = 1;
-    for (let k = 0; k < r; k++) out *= (n - k);
-    return out;
-  }
-
-  function multiplyDownSteps(n, r){
-    if (r > n) return "r is bigger than n → 0";
-    const parts = [];
-    for (let k = 0; k < r; k++) parts.push(String(n - k));
-    return parts.join(" · ");
-  }
-
-  // Calculator
-  const nEl = document.getElementById("n");
-  const rEl = document.getElementById("r");
-  const calcOut = document.getElementById("calcOut");
-  const calcSteps = document.getElementById("calcSteps");
-  const calcBox = document.getElementById("calcBox");
-
-  function updateCalc(){
-    const n = parseInt(nEl.value, 10);
-    const r = parseInt(rEl.value, 10);
-
-    if (!Number.isFinite(n) || !Number.isFinite(r) || n < 0 || r < 0){
-      calcBox.className = "box no";
-      calcOut.textContent = "Enter n and r (0 or higher).";
-      calcSteps.textContent = "";
-      return;
-    }
-
-    const val = multiplyDownValue(n, r);
-    calcBox.className = "box ok";
-    calcOut.textContent = `P(${n},${r}) = ${val}`;
-    calcSteps.textContent = multiplyDownSteps(n, r);
-  }
-
-  document.getElementById("btnCalc").addEventListener("click", updateCalc);
-  updateCalc();
-
-  // Score
-  let score = 0, streak = 0, count = 0;
-  const scoreEl = document.getElementById("score");
-  const streakEl = document.getElementById("streak");
-  const countEl = document.getElementById("count");
-  function renderScore(){
-    scoreEl.textContent = score;
-    streakEl.textContent = streak;
-    countEl.textContent = count;
-  }
-  function resetScore(){
-    score = 0; streak = 0; count = 0;
-    renderScore();
-    document.getElementById("scenarioResult").style.display = "none";
-    document.getElementById("practiceResult").style.display = "none";
-    document.getElementById("answer").value = "";
-  }
-  document.getElementById("btnReset").addEventListener("click", resetScore);
-
-  // Practice A — decide
-  const scenarios = [
-    { text:"Awarding gold, silver, and bronze among runners", isPerm:true, why:"Ranks are different (gold/silver/bronze) → order matters." },
-    { text:"Choosing students for a committee", isPerm:false, why:"No roles. Same group = same result." },
-    { text:"Creating a PIN (order matters)", isPerm:true, why:"1234 is not the same as 4321." },
-    { text:"Picking toppings for a pizza", isPerm:false, why:"Same toppings either way." },
-    { text:"Assigning Captain and Assistant Captain", isPerm:true, why:"Two different roles → order matters." }
-  ];
-  let currentScenario = null;
-  const scenarioText = document.getElementById("scenarioText");
-  const scenarioResult = document.getElementById("scenarioResult");
-
-  function newScenario(){
-    currentScenario = scenarios[randInt(0, scenarios.length - 1)];
-    scenarioText.textContent = currentScenario.text;
-    scenarioResult.style.display = "none";
-  }
-
-  function answerScenario(userPerm){
-    const correct = (userPerm === currentScenario.isPerm);
-    count += 1;
-
-    if (correct){
-      score += 1; streak += 1;
-      scenarioResult.className = "box ok";
-      scenarioResult.innerHTML = `<b>Correct.</b> ${currentScenario.why}`;
-    } else {
-      streak = 0;
-      scenarioResult.className = "box no";
-      const label = currentScenario.isPerm ? "Permutation" : "Not permutation";
-      scenarioResult.innerHTML = `<b>No.</b> Correct: <b>${label}</b>. ${currentScenario.why}`;
-    }
-
-    scenarioResult.style.display = "block";
-    renderScore();
-  }
-
-  document.getElementById("btnPerm").addEventListener("click", () => answerScenario(true));
-  document.getElementById("btnNot").addEventListener("click", () => answerScenario(false));
-
-  // Practice B — calculate
-  const practiceQ = document.getElementById("practiceQ");
-  const hintEl = document.getElementById("hint");
-  const ansEl = document.getElementById("answer");
-  const practiceResult = document.getElementById("practiceResult");
-
-  let currentPractice = null;
-
-  function newCalcQuestion(){
-    const types = [
-      { label:"podium (gold/silver/bronze)", r:3 },
-      { label:"roles (President/Vice/Treasurer)", r:3 },
-      { label:"top 4 finishers", r:4 },
-      { label:"choose 5 different roles", r:5 }
-    ];
-    const pick = types[randInt(0, types.length - 1)];
-    const n = randInt(Math.max(6, pick.r + 1), 18);
-    const r = pick.r;
-
-    currentPractice = { n, r, val: multiplyDownValue(n, r), label: pick.label };
-
-    practiceQ.textContent = `There are ${n} choices. You are filling ${r} spots. (${pick.label})`;
-    hintEl.textContent = `So: n = ${n} (starting choices), r = ${r} (spots). Multiply down ${r} times.`;
-    ansEl.value = "";
-    practiceResult.style.display = "none";
-  }
-
-  function checkCalc(){
-    const user = parseInt(ansEl.value, 10);
-    count += 1;
-
-    if (!Number.isFinite(user)){
-      streak = 0;
-      practiceResult.className = "box no";
-      practiceResult.innerHTML = `Type a number. Answer: <b>${currentPractice.val}</b> <br/><span class="muted tiny">Steps: ${multiplyDownSteps(currentPractice.n, currentPractice.r)}</span>`;
-      practiceResult.style.display = "block";
-      renderScore();
-      return;
-    }
-
-    if (user === currentPractice.val){
-      score += 1; streak += 1;
-      practiceResult.className = "box ok";
-      practiceResult.innerHTML = `<b>Correct.</b> <br/><span class="muted tiny">Steps: ${multiplyDownSteps(currentPractice.n, currentPractice.r)}</span>`;
-    } else {
-      streak = 0;
-      practiceResult.className = "box no";
-      practiceResult.innerHTML = `<b>No.</b> Correct: <b>${currentPractice.val}</b> <br/><span class="muted tiny">Steps: ${multiplyDownSteps(currentPractice.n, currentPractice.r)}</span>`;
-    }
-
-    practiceResult.style.display = "block";
-    renderScore();
-  }
-
-  function revealCalc(){
-    practiceResult.className = "box ok";
-    practiceResult.innerHTML = `Answer: <b>${currentPractice.val}</b> <br/><span class="muted tiny">Steps: ${multiplyDownSteps(currentPractice.n, currentPractice.r)}</span>`;
-    practiceResult.style.display = "block";
-  }
-
-  document.getElementById("btnCheck").addEventListener("click", checkCalc);
-  document.getElementById("btnReveal").addEventListener("click", revealCalc);
-  ansEl.addEventListener("keydown", (e) => { if (e.key === "Enter") checkCalc(); });
-
-  // New set
-  function newSet(){
-    newScenario();
-    newCalcQuestion();
-    document.getElementById("practice").scrollIntoView({behavior:"smooth"});
-  }
-  document.getElementById("btnNew").addEventListener("click", newSet);
-
-  // Init
-  resetScore();
-  newScenario();
-  newCalcQuestion();
-</script>
-</body>
-</html>
