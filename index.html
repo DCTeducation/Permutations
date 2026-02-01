@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Permutations | DCT Education</title>
 
+
+
   <style>
     :root{
       --text:#0f172a;
@@ -30,6 +32,32 @@
       --focus: 0 0 0 3px rgba(37, 99, 235, .25);
     }
 
+  /* Mobile polish */
+@media (max-width: 520px){
+  .wrap{ padding:18px 12px 50px; }
+  .top{ padding:14px; }
+
+  h1{ font-size:26px; }
+  .sub{ font-size:14px; }
+
+  /* Nav pills: easier to tap */
+  .nav{ gap:8px; }
+  .pill{ padding:10px 12px; font-size:13px; }
+
+  /* Calculator: stack cleanly */
+  .row{ flex-direction:column; align-items:stretch; }
+  .row > div{ width:100%; }
+  input{ width:100%; min-width:0; }
+
+  /* Cards: slightly tighter */
+  .card{ padding:14px; }
+
+  /* Details: make "Show solution" more tappable */
+  details summary{ padding:10px 0; }
+}
+</style>
+
+  
     /* Dark mode variables via class */
     .dark {
       --text:#f4f6fa;
