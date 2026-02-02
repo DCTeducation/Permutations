@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Permutations | DCT Education</title>
+  <title>Combinations | DCT Education</title>
 
   <style>
     :root{
@@ -184,7 +184,7 @@
   <div class="wrap">
     <div class="top">
       <div class="topHeader">
-        <h1>Permutations</h1>
+        <h1>Combinations</h1>
         <button id="darkModeToggle" class="darkToggle" aria-label="Toggle dark mode">🌙</button>
       </div>
       <p class="sub">Simple: learn it → see it → practice it.</p>
@@ -195,68 +195,63 @@
         <a class="pill" href="#practice">PRACTICE</a>
       </div>
     </div>
+
     <script>
-      // Basic dark mode toggle for demonstration, no persistence
+      // Basic dark mode toggle (matches your current style)
       document.getElementById('darkModeToggle').onclick = function() {
         document.body.classList.toggle('dark');
       };
     </script>
+
     <!-- LEARN -->
     <section id="learn">
       <div class="sectionTitle">LEARN</div>
       <div class="card">
 
-        <!-- 1. What a permutation is -->
-        <h2>What is a permutation?</h2>
+        <h2>What is a combination?</h2>
         <div class="rule">
-          <div class="big">Order matters. Changing the order gives a new result.</div>
-          <div class="muted tiny" style="margin-top:6px;">Example: 321 is not the same as 123.</div>
+          <div class="big"><b>Order does NOT matter.</b> Changing the order does not create a new answer.</div>
+          <div class="muted tiny" style="margin-top:6px;">Example: {A, B, C} is the same group as {C, B, A}.</div>
         </div>
 
-        <!-- 2. When to use it (quick checklist) -->
-        <h3>When do you use permutations?</h3>
+        <h3>When do you use combinations?</h3>
         <ul>
-          <li>Different places or prizes (like 1st/2nd/3rd)</li>
-          <li>Assigning special jobs or roles</li>
-          <li>Anytime the <b>order makes a new answer</b></li>
+          <li>Choosing a group / team / committee</li>
+          <li>Picking items where the order doesn’t change anything</li>
+          <li>Anytime you only care <b>who is chosen</b>, not the order</li>
         </ul>
 
-        <!-- 3. What n and r mean -->
         <h3>What do <code>n</code> and <code>r</code> mean?</h3>
         <div class="grid">
           <div class="box">
             <div class="big"><code>n</code> = total choices you have</div>
-            <p class="muted" style="margin:6px 0 0;">Example: 8 people in a race → <code>n = 8</code></p>
+            <p class="muted" style="margin:6px 0 0;">Example: 12 students available → <code>n = 12</code></p>
           </div>
           <div class="box">
-            <div class="big"><code>r</code> = number of spots to fill</div>
-            <p class="muted" style="margin:6px 0 0;">Example: 3 medal places → <code>r = 3</code></p>
+            <div class="big"><code>r</code> = how many you choose</div>
+            <p class="muted" style="margin:6px 0 0;">Example: choose 4 students → <code>r = 4</code></p>
           </div>
         </div>
 
-        <!-- 4. The base formula -->
-        <h3>How do you find the answer?</h3>
-        <div class="box" style="margin-bottom:16px;">
-          <b>Super simple:</b><br>
-          Start with <code>n</code>.<br>
-          Multiply by one less each time, <b>do this <code>r</code> times</b>.<br>
-          (No repeats allowed!)
+        <h3>The combination formula</h3>
+        <div class="box" style="margin-bottom:8px;">
+          <b>This removes all the different orders.</b><br>
+          It counts each group only once.
         </div>
-        <div class="muted tiny" style="margin-bottom:16px;">
-          It's just: <code>n × (n-1) × (n-2) ...</code> (stop after <code>r</code> numbers)
+        <div class="box">
+          <b>Formula:</b> <code>C(n,r) = n! / ( r!(n−r)! )</code>
         </div>
 
-        <!-- 5. Mini example -->
         <h3>Mini example</h3>
         <div class="box">
-          <b>How many ways can 3 people get 1st, 2nd, and 3rd?</b><br>
-          <code>3 × 2 × 1 = 6</code>
+          <b>Choose 2 toppings from 5.</b><br>
+          <code>C(5,2) = 10</code><br>
+          Pepperoni + mushrooms is the same as mushrooms + pepperoni, so order doesn’t matter.
         </div>
 
-        <!-- Quick test tip -->
         <details style="margin-top:18px;">
-          <summary>Quick tip: How do I know if it's a permutation?</summary>
-          <p class="muted">If the roles or order matter, it's a permutation.</p>
+          <summary>Quick tip: How do I know if it's a combination?</summary>
+          <p class="muted">If you can swap the order and nothing changes, it’s a combination.</p>
         </details>
       </div>
     </section>
@@ -267,65 +262,54 @@
 
       <div class="grid">
         <div class="card">
-          <h2>Example 1: Podium</h2>
+          <h2>Example 1: Committee</h2>
           <p>
-            <b>Before you start:</b> <br>
-            <b>n</b> = how many choices you have at the start. Here: 12 runners.<br>
-            <b>r</b> = how many spots you are filling. Here: 3 (gold, silver, bronze).
+            <b>Question:</b> How many ways can you choose 3 students from 10 to be on a committee?
           </p>
-          <p><b>Question:</b> How many ways can gold, silver, and bronze medals be given out among 12 runners?</p>
-          <p><b>Why does order matter?</b><br>
-            Gold, silver, and bronze are different places—giving Alice gold and Bob silver is NOT the same as giving Bob gold and Alice silver.
+          <p><b>Why order doesn’t matter:</b><br>
+            A committee has no “first/second/third” — it’s just a group.
           </p>
           <div class="box">
-            <b>Math:</b> Start at 12 and multiply down 3 times: <code>12 · 11 · 10 = 1320</code>
+            <b>n</b> = 10, <b>r</b> = 3<br>
+            <b>Answer:</b> <code>C(10,3) = 120</code>
           </div>
-          <p><b>Why this is a permutation:</b> The order you give out the medals changes who wins what, so each arrangement is unique.</p>
         </div>
 
         <div class="card">
-          <h2>Example 2: Roles</h2>
+          <h2>Example 2: Choosing items</h2>
           <p>
-            <b>Before you start:</b> <br>
-            <b>n</b> = how many people you can pick from. Here: 25 students.<br>
-            <b>r</b> = how many different roles you are assigning. Here: 3 (President, Vice-President, Treasurer).
+            <b>Question:</b> How many ways can you choose 2 books from 8?
           </p>
-          <p><b>Question:</b> In how many ways can you assign President, Vice-President, and Treasurer from 25 students?</p>
-          <p><b>Why does order matter?</b><br>
-            Each role is different. Assigning Sam as President and Maria as Treasurer is NOT the same as Maria as President and Sam as Treasurer.
+          <p><b>Why order doesn’t matter:</b><br>
+            Choosing Book A and Book B is the same as choosing Book B and Book A.
           </p>
           <div class="box">
-            <b>Math:</b> Start at 25 and multiply down 3 times: <code>25 · 24 · 23 = 13,800</code>
+            <b>n</b> = 8, <b>r</b> = 2<br>
+            <b>Answer:</b> <code>C(8,2) = 28</code>
           </div>
-          <p><b>Why this is a permutation:</b> The order of the roles changes the result. Each assignment gives different students different jobs.</p>
         </div>
 
         <div class="card">
-          <h2>Example 3: Not a permutation</h2>
-          <p>
-            <b>Before you start:</b><br>
-            <b>n</b> = total students to pick from. Here: 18 students (for example).<br>
-            <b>r</b> = number to choose for the committee. Here: 5.
-          </p>
-          <p><b>Question:</b> How many ways can you choose 5 students to be on a committee?</p>
+          <h2>Example 3: Not a combination</h2>
+          <p><b>Question:</b> How many ways can you assign President and Vice-President from 10 students?</p>
           <div class="box no">
-            <b>Not a permutation.</b> On a committee, the order does NOT matter—just who is in the group. Order doesn’t create a new outcome.<br>
-            <b>This is a combination problem, not a permutation.</b>
+            <b>Not a combination.</b> Those are different roles, so order matters.<br>
+            <b>This is a permutation problem, not a combination.</b>
           </div>
         </div>
 
         <div class="card">
           <h2>Quick calculator</h2>
-          <p class="muted tiny">Type n and r. It shows the “multiply down” steps.</p>
+          <p class="muted tiny">Type n and r. It calculates combinations.</p>
 
           <div class="row">
             <div>
-              <label for="n">n (starting choices)</label>
+              <label for="n">n (total choices)</label>
               <input id="n" type="number" min="0" value="10" />
             </div>
             <div>
-              <label for="r">r (spots filled)</label>
-              <input id="r" type="number" min="0" value="4" />
+              <label for="r">r (chosen)</label>
+              <input id="r" type="number" min="0" value="3" />
             </div>
             <div>
               <button class="primary" id="btnCalc" type="button">Calculate</button>
@@ -333,8 +317,8 @@
           </div>
 
           <div id="calcBox" class="box ok">
-            <div class="big" id="calcOut">P(10,4) = 5040</div>
-            <div class="muted tiny" id="calcSteps">10 · 9 · 8 · 7</div>
+            <div class="big" id="calcOut">C(10,3) = 120</div>
+            <div class="muted tiny" id="calcSteps">10! / (3! · 7!)</div>
           </div>
         </div>
       </div>
@@ -345,172 +329,156 @@
       <div class="sectionTitle">PRACTICE</div>
 
       <div class="card">
-        <h2 style="margin-bottom:8px;">Permutation Check</h2>
+        <h2 style="margin-bottom:8px;">Combination Check</h2>
         <div class="box">
-          <b>Is it a permutation?</b>
+          <b>Is it a combination?</b>
           <ul style="margin:8px 0 4px 20px;">
-            <li>Roles or spots are different <span class="muted tiny">(e.g., President vs. Secretary)</span></li>
-            <li>Order matters for the outcome <span class="muted tiny">(e.g., first place ≠ second place)</span></li>
-            <li>Each arrangement creates a new result</li>
+            <li>It’s a group / selection <span class="muted tiny">(committee, team, chosen items)</span></li>
+            <li>Order does not change anything</li>
+            <li>You only care <b>who</b> is chosen, not the order</li>
           </ul>
         </div>
       </div>
 
-      <!-- ---- EXAM-FOCUSED PRACTICE SET ---- -->
       <div class="card">
-        <h2 style="margin-bottom:8px;">Exam-Style Permutation Practice</h2>
-        <div class="muted tiny" style="margin-bottom:10px;">Try each group. Click "Show solution" to check your work.</div>
+        <h2 style="margin-bottom:8px;">Exam-Style Combination Practice (8 Questions)</h2>
+        <div class="muted tiny" style="margin-bottom:10px;">Try each question. Click "Show solution" to check.</div>
+
         <div class="grid practiceGrid">
 
-          <!-- Group 1: People / Lineups -->
           <div>
-            <h3 style="margin:0;">1. People / Lineups</h3>
+            <h3 style="margin:0;">1. Basic groups</h3>
 
-            <!-- Q1 -->
             <div class="box" style="margin-top:8px;">
-              <b>Q1.</b> In how many ways can 5 students line up for lunch from a class of 24?
+              <b>Q1.</b> Choose 3 students from 8.
               <details>
                 <summary>Show solution</summary>
-                n = 24 because there are 24 students to choose from.<br>
-                r = 5 because we are arranging 5 in a line.<br>
-                Answer: 24 × 23 × 22 × 21 × 20 = <b>5,100,480</b>
+                n = 8, r = 3<br>
+                C(8,3) = 56
               </details>
             </div>
-            <!-- Q2 -->
+
             <div class="box" style="margin-top:8px;">
-              <b>Q2.</b> In how many ways can President, Vice-President, and Secretary be chosen from 12 students?
+              <b>Q2.</b> Choose 2 players from a team of 6.
               <details>
                 <summary>Show solution</summary>
-                n = 12 because there are 12 students eligible.<br>
-                r = 3 because there are 3 different positions.<br>
-                Answer: 12 × 11 × 10 = <b>1,320</b>
+                n = 6, r = 2<br>
+                C(6,2) = 15
               </details>
             </div>
-            <!-- Q3 -->
+
             <div class="box" style="margin-top:8px;">
-              <b>Q3.</b> In how many ways can gold, silver, and bronze medals be awarded among 10 runners?
+              <b>Q3.</b> How many different groups of 4 can be made from 10 people?
               <details>
                 <summary>Show solution</summary>
-                n = 10 because there are 10 runners.<br>
-                r = 3 because there are 3 distinct medals.<br>
-                Answer: 10 × 9 × 8 = <b>720</b>
+                n = 10, r = 4<br>
+                C(10,4) = 210
               </details>
             </div>
           </div>
 
-          <!-- Group 2: Letters / Digits -->
           <div>
-            <h3 style="margin:0;">2. Letters / Digits</h3>
+            <h3 style="margin:0;">2. Real-life selections</h3>
 
-            <!-- Q4 -->
             <div class="box" style="margin-top:8px;">
-              <b>Q4.</b> How many ways can you make a 4-letter code using the letters A, B, C, D, E, F if each letter is used only once?
+              <b>Q4.</b> A pizza shop has 9 toppings. How many ways can you choose 3 toppings?
               <details>
                 <summary>Show solution</summary>
-                n = 6 because there are 6 letters to choose from.<br>
-                r = 4 because the code is 4 letters long.<br>
-                Answer: 6 × 5 × 4 × 3 = <b>360</b>
+                n = 9, r = 3<br>
+                C(9,3) = 84
               </details>
             </div>
-            <!-- Q5 -->
+
             <div class="box" style="margin-top:8px;">
-              <b>Q5.</b> You have 8 different digits (0-7). How many different 3-digit numbers can you form if no digit repeats?
+              <b>Q5.</b> From 12 songs, how many playlists of 5 songs can be chosen (order doesn’t matter)?
               <details>
                 <summary>Show solution</summary>
-                n = 8 because there are 8 digits available.<br>
-                r = 3 because the number has 3 digits.<br>
-                Answer: 8 × 7 × 6 = <b>336</b>
+                n = 12, r = 5<br>
+                C(12,5) = 792
               </details>
             </div>
-            <!-- Q6 -->
+
             <div class="box" style="margin-top:8px;">
-              <b>Q6.</b> How many 5-letter “words” can you form from the word PIRATES if each letter is used at most once per word?
+              <b>Q6.</b> A class has 20 students. How many ways can you choose 4 to represent the class?
               <details>
                 <summary>Show solution</summary>
-                n = 7 because "PIRATES" has 7 distinct letters.<br>
-                r = 5 because each "word" uses 5 letters.<br>
-                Answer: 7 × 6 × 5 × 4 × 3 = <b>2,520</b>
+                n = 20, r = 4<br>
+                C(20,4) = 4,845
               </details>
             </div>
           </div>
 
-          <!-- Group 3: With restrictions -->
           <div>
-            <h3 style="margin:0;">3. Restrictions</h3>
+            <h3 style="margin:0;">3. “Trap-looking” but still combinations</h3>
 
-            <!-- Q7 -->
             <div class="box" style="margin-top:8px;">
-              <b>Q7.</b> In how many ways can 6 people stand in a line if Ali must be first?
+              <b>Q7.</b> Choose 3 letters from A, B, C, D, E. (Just choosing a set, not forming a code.)
               <details>
                 <summary>Show solution</summary>
-                n = 5 because after Ali (already placed first), 5 people are left.<br>
-                r = 5 because there are 5 spots left to fill.<br>
-                Answer: 5 × 4 × 3 × 2 × 1 = <b>120</b>
+                n = 5, r = 3<br>
+                C(5,3) = 10
               </details>
             </div>
-            <!-- Q8 -->
+
             <div class="box" style="margin-top:8px;">
-              <b>Q8.</b> How many ways can 5 books be arranged on a shelf if Book A and Book B must be together?
+              <b>Q8.</b> A bag has 14 different candies. How many ways can you pick 6 candies?
               <details>
                 <summary>Show solution</summary>
-                Treat A & B as a single unit: now 4 “items” to arrange (= 4! = 24 ways). A & B can switch order: 2 ways.<br>
-                n = 5 books, r = 5 spots.<br>
-                So: 4! × 2 = 24 × 2 = <b>48</b>
-              </details>
-            </div>
-            <!-- Q9 -->
-            <div class="box" style="margin-top:8px;">
-              <b>Q9.</b> How many ways can 7 people arrange themselves in a row if Sara and Mia cannot be next to each other?
-              <details>
-                <summary>Show solution</summary>
-                First, total arrangements: 7! = 5040.<br>
-                Number where Sara and Mia are together: treat as a “block”: 6! × 2 = 720 × 2 = 1440.<br>
-                Subtract: 5040 – 1440 = <b>3,600</b>
-                <br>
-                n = 7 people, r = 7 spots.
+                n = 14, r = 6<br>
+                C(14,6) = 3,003
               </details>
             </div>
           </div>
 
-          <!-- Group 4: With repeated items (or extra restrictions) -->
           <div>
-            <h3 style="margin:0;">4. With Repeated Items / Harder Restrictions</h3>
+            <h3 style="margin:0;">4. Quick reminder</h3>
 
-            <!-- Q10 -->
-            <div class="box" style="margin-top:8px;">
-              <b>Q10.</b> How many ways can you order the letters in SUCCESS?
-              <details>
-                <summary>Show solution</summary>
-                The word SUCCESS has 7 letters: S(3), U(1), C(2), E(1).<br>
-                n = 7 total letters.<br>
-                r = 7 because all are arranged.<br>
-                Answer: 7! / (3! × 2! × 1! × 1!) = 5040 / (6×2) = 5040 / 12 = <b>420</b>
-              </details>
-            </div>
-            <!-- Q11 -->
-            <div class="box" style="margin-top:8px;">
-              <b>Q11.</b> In how many ways can the letters of the word LEVEL be arranged?
-              <details>
-                <summary>Show solution</summary>
-                LEVEL: 5 letters, L(2), E(2), V(1)<br>
-                n = 5 total letters.<br>
-                r = 5 since all letters are arranged.<br>
-                Answer: 5! / (2! × 2! × 1!) = 120 / 4 = <b>30</b>
-              </details>
-            </div>
-            <!-- Q12 -->
-            <div class="box" style="margin-top:8px;">
-              <b>Q12.</b> How many ways can the letters of the word BANANA be arranged?
-              <details>
-                <summary>Show solution</summary>
-                BANANA has 6 letters: A(3), N(2), B(1)<br>
-                n = 6 total letters.<br>
-                r = 6, arranging all.<br>
-                Answer: 6! / (3! × 2! × 1!) = 720 / (6×2) = 720 / 12 = <b>60</b>
-              </details>
+            <div class="box ok" style="margin-top:8px;">
+              <b>Reminder:</b><br>
+              If the question says “choose” / “select” / “group” — it’s usually a combination.<br>
+              If it says “arrange” / “assign roles” / “first place” — it’s usually a permutation.
             </div>
           </div>
+
         </div>
       </div>
     </section>
   </div>
+
+  <script>
+    function factorial(x){
+      if(x < 0) return NaN;
+      let p = 1;
+      for(let i=2;i<=x;i++) p *= i;
+      return p;
+    }
+
+    function nCr(n,r){
+      if(r<0 || n<0 || r>n) return NaN;
+      return factorial(n) / (factorial(r) * factorial(n-r));
+    }
+
+    const btn = document.getElementById('btnCalc');
+    btn?.addEventListener('click', () => {
+      const n = Number(document.getElementById('n').value);
+      const r = Number(document.getElementById('r').value);
+
+      const out = document.getElementById('calcOut');
+      const steps = document.getElementById('calcSteps');
+      const box = document.getElementById('calcBox');
+
+      if(!Number.isFinite(n) || !Number.isFinite(r) || r>n || n<0 || r<0){
+        out.textContent = "Invalid — make sure 0 ≤ r ≤ n";
+        steps.textContent = "Tip: r cannot be bigger than n.";
+        box.className = "box no";
+        return;
+      }
+
+      const ans = nCr(n,r);
+      out.textContent = `C(${n},${r}) = ${ans.toLocaleString()}`;
+      steps.textContent = `${n}! / (${r}! · ${(n-r)}!)`;
+      box.className = "box ok";
+    });
+  </script>
+</body>
+</html>
